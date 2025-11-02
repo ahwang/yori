@@ -1,0 +1,34 @@
+{
+  "permissions": {},
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "yorihandlers",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "firebaseProjectId",
+      "environmentVariableName": "FIREBASE_PROJECT_ID"
+    },
+    {
+      "cloudFormationParameterName": "firebaseClientEmail",
+      "environmentVariableName": "FIREBASE_CLIENT_EMAIL"
+    },
+    {
+      "cloudFormationParameterName": "plaidClientId",
+      "environmentVariableName": "PLAID_CLIENT_ID"
+    },
+    {
+      "cloudFormationParameterName": "plaidEnv",
+      "environmentVariableName": "PLAID_ENV"
+    }
+  ],
+  "secretNames": [
+    "FIREBASE_PRIVATE_KEY",
+    "PLAID_SECRET"
+  ]
+}

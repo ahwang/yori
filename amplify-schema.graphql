@@ -1,0 +1,159 @@
+# Amplify GraphQL Schema for Yori Financial App
+
+type UserProfile @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  firebaseUID: String! @index(name: "byFirebaseUID")
+  email: String
+  displayName: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  onboardingCompleted: Boolean
+  hasConnectedAccounts: Boolean
+  preferredCurrency: String
+  timezone: String
+  profilePictureURL: String
+  phoneNumber: String
+  dateOfBirth: AWSDate
+
+  # Relationships
+  accounts: [ConnectedAccount] @hasMany(indexName: "byUserProfile", fields: ["id"])
+  goals: [FinancialGoal] @hasMany(indexName: "byUserProfile", fields: ["id"])
+  transactions: [Transaction] @hasMany(indexName: "byUserProfile", fields: ["id"])
+}
+
+type ConnectedAccount @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userProfileID: ID! @index(name: "byUserProfile")
+  accountName: String!
+  accountType: AccountType!
+  balance: Float!
+  institution: String!
+  plaidAccountID: String
+  plaidItemID: String
+  isActive: Boolean!
+  lastSynced: AWSDateTime
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+
+  # Relationships
+  userProfile: UserProfile @belongsTo(fields: ["userProfileID"])
+  transactions: [Transaction] @hasMany(indexName: "byConnectedAccount", fields: ["id"])
+}
+
+type FinancialGoal @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userProfileID: ID! @index(name: "byUserProfile")
+  title: String!
+  description: String
+  targetAmount: Float!
+  currentAmount: Float
+  targetDate: AWSDate
+  goalType: GoalType!
+  isCompleted: Boolean!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+
+  # Relationships
+  userProfile: UserProfile @belongsTo(fields: ["userProfileID"])
+}
+
+type Transaction @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userProfileID: ID! @index(name: "byUserProfile")
+  connectedAccountID: ID @index(name: "byConnectedAccount")
+  amount: Float!
+  description: String!
+  category: String
+  subcategory: String
+  transactionDate: AWSDate!
+  plaidTransactionID: String
+  isManualEntry: Boolean!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+
+  # Relationships
+  userProfile: UserProfile @belongsTo(fields: ["userProfileID"])
+  connectedAccount: ConnectedAccount @belongsTo(fields: ["connectedAccountID"])
+}
+
+type PlaidToken @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userProfileID: ID! @index(name: "byUserProfile")
+  itemID: String!
+  accessToken: String! # This should be encrypted in production
+  institutionID: String
+  institutionName: String
+  isActive: Boolean!
+  lastUsed: AWSDateTime
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type FinancialSummary @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userProfileID: ID! @index(name: "byUserProfile")
+  netWorth: Float!
+  totalAssets: Float!
+  totalLiabilities: Float!
+  netWorthChangePercent: Float
+  calculatedAt: AWSDateTime!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+
+  # Asset breakdown as JSON
+  assetBreakdown: AWSJSON
+}
+
+# Enums
+enum AccountType {
+  CHECKING
+  SAVINGS
+  CREDIT_CARD
+  INVESTMENT
+  RETIREMENT
+  MORTGAGE
+  LOAN
+  OTHER
+}
+
+enum GoalType {
+  EMERGENCY_FUND
+  RETIREMENT
+  VACATION
+  HOME_PURCHASE
+  DEBT_PAYOFF
+  INVESTMENT
+  OTHER
+}
+
+# Custom mutations for Firebase integration
+type Mutation {
+  createUserProfileWithFirebase(
+    firebaseUID: String!
+    email: String
+    displayName: String
+  ): UserProfile @function(name: "createUserProfileWithFirebase-${env}")
+
+  syncPlaidAccounts(
+    publicToken: String!
+  ): [ConnectedAccount] @function(name: "syncPlaidAccounts-${env}")
+
+  updateAccountBalances(
+    userProfileID: ID!
+  ): [ConnectedAccount] @function(name: "updateAccountBalances-${env}")
+
+  calculateFinancialSummary(
+    userProfileID: ID!
+  ): FinancialSummary @function(name: "calculateFinancialSummary-${env}")
+}
+
+# Custom queries
+type Query {
+  getUserProfileByFirebaseUID(
+    firebaseUID: String!
+  ): UserProfile @function(name: "getUserProfileByFirebaseUID-${env}")
+
+  getFinancialSummaryForUser(
+    userProfileID: ID!
+  ): FinancialSummary @function(name: "getFinancialSummaryForUser-${env}")
+}

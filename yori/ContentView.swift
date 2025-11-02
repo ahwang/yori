@@ -19,6 +19,8 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
+//https://yori-d294c.firebaseapp.com/__/auth/handler
+
+//#Preview {
+//    ContentView()
+//}

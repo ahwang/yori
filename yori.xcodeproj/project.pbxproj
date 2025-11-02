@@ -6,13 +6,38 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8117F5222EB6A87100481BC8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8117F5212EB6A87100481BC8 /* FirebaseMessaging */; };
+		81F25AC02EB69A18006BCAD2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25ABF2EB69A18006BCAD2 /* FirebaseAuth */; };
+		81F25AC22EB69A18006BCAD2 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25AC12EB69A18006BCAD2 /* FirebaseCore */; };
+		81F25AC52EB69C96006BCAD2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25AC42EB69C96006BCAD2 /* GoogleSignIn */; };
+		81F25AC72EB69C96006BCAD2 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25AC62EB69C96006BCAD2 /* GoogleSignInSwift */; };
+		9758114CBC528AAE671C2525 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B008A9C51564F117DEDE4631 /* awsconfiguration.json */; };
+		E2012E656003C0CCD6CFCD7B /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 1053A870C48BB537AED81B93 /* amplifyconfiguration.json */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		1053A870C48BB537AED81B93 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		811400612EB679BA00DB6C8C /* yori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yori.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B008A9C51564F117DEDE4631 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; lastKnownFileType = text.json; name = awsconfiguration.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		811400782EB67D0600DB6C8C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 811400602EB679BA00DB6C8C /* yori */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		811400632EB679BA00DB6C8C /* yori */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				811400782EB67D0600DB6C8C /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+			);
 			path = yori;
 			sourceTree = "<group>";
 		};
@@ -23,6 +48,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81F25AC22EB69A18006BCAD2 /* FirebaseCore in Frameworks */,
+				81F25AC02EB69A18006BCAD2 /* FirebaseAuth in Frameworks */,
+				8117F5222EB6A87100481BC8 /* FirebaseMessaging in Frameworks */,
+				81F25AC52EB69C96006BCAD2 /* GoogleSignIn in Frameworks */,
+				81F25AC72EB69C96006BCAD2 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +64,7 @@
 			children = (
 				811400632EB679BA00DB6C8C /* yori */,
 				811400622EB679BA00DB6C8C /* Products */,
+				874240D9F509E82633919C4E /* AmplifyConfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -43,6 +74,15 @@
 				811400612EB679BA00DB6C8C /* yori.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		874240D9F509E82633919C4E /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				B008A9C51564F117DEDE4631 /* awsconfiguration.json */,
+				1053A870C48BB537AED81B93 /* amplifyconfiguration.json */,
+			);
+			name = AmplifyConfig;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -65,6 +105,11 @@
 			);
 			name = yori;
 			packageProductDependencies = (
+				81F25ABF2EB69A18006BCAD2 /* FirebaseAuth */,
+				81F25AC12EB69A18006BCAD2 /* FirebaseCore */,
+				81F25AC42EB69C96006BCAD2 /* GoogleSignIn */,
+				81F25AC62EB69C96006BCAD2 /* GoogleSignInSwift */,
+				8117F5212EB6A87100481BC8 /* FirebaseMessaging */,
 			);
 			productName = yori;
 			productReference = 811400612EB679BA00DB6C8C /* yori.app */;
@@ -94,6 +139,10 @@
 			);
 			mainGroup = 811400582EB679BA00DB6C8C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				81F25AC32EB69C96006BCAD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 811400622EB679BA00DB6C8C /* Products */;
 			projectDirPath = "";
@@ -109,6 +158,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9758114CBC528AAE671C2525 /* awsconfiguration.json in Resources */,
+				E2012E656003C0CCD6CFCD7B /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,23 +302,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = yori/yori.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GA2GEBCJV2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = yori/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID and Touch ID to provide secure and convenient authentication, allowing you to quickly and safely access your financial planning data without entering your password.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = yori.yori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -283,23 +341,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = yori/yori.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GA2GEBCJV2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = yori/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID and Touch ID to provide secure and convenient authentication, allowing you to quickly and safely access your financial planning data without entering your password.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = yori.yori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -332,6 +397,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.5.0;
+			};
+		};
+		81F25AC32EB69C96006BCAD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8117F5212EB6A87100481BC8 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		81F25ABF2EB69A18006BCAD2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		81F25AC12EB69A18006BCAD2 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		81F25AC42EB69C96006BCAD2 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F25AC32EB69C96006BCAD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		81F25AC62EB69C96006BCAD2 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F25AC32EB69C96006BCAD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 811400592EB679BA00DB6C8C /* Project object */;
 }

@@ -1,0 +1,250 @@
+{
+  "api": {
+    "yori": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "function": {
+    "calculateFinancialSummary": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "yori"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "createUserProfileWithFirebase": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getUserProfileByFirebaseUID": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "refreshAccountBalances": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "yori"
+        },
+        {
+          "attributes": [
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "syncPlaidAccounts"
+        },
+        {
+          "attributes": [
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "calculateFinancialSummary"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "syncPlaidAccounts": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "yori"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "yorihandlers": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_createUserProfileWithFirebase_firebaseClientEmail": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
+    "AMPLIFY_function_createUserProfileWithFirebase_firebaseProjectId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
+    "AMPLIFY_function_createUserProfileWithFirebase_plaidClientId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
+    "AMPLIFY_function_createUserProfileWithFirebase_plaidEnv": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
+    "AMPLIFY_function_createUserProfileWithFirebase_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserProfileByFirebaseUID_firebaseClientEmail": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserProfileByFirebaseUID"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserProfileByFirebaseUID_firebaseProjectId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserProfileByFirebaseUID"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserProfileByFirebaseUID_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserProfileByFirebaseUID"
+        }
+      ]
+    },
+    "AMPLIFY_function_refreshAccountBalances_plaidClientId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "refreshAccountBalances"
+        }
+      ]
+    },
+    "AMPLIFY_function_refreshAccountBalances_plaidEnv": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "refreshAccountBalances"
+        }
+      ]
+    },
+    "AMPLIFY_function_refreshAccountBalances_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "refreshAccountBalances"
+        }
+      ]
+    },
+    "AMPLIFY_function_syncPlaidAccounts_plaidClientId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "syncPlaidAccounts"
+        }
+      ]
+    },
+    "AMPLIFY_function_syncPlaidAccounts_plaidEnv": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "syncPlaidAccounts"
+        }
+      ]
+    },
+    "AMPLIFY_function_syncPlaidAccounts_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "syncPlaidAccounts"
+        }
+      ]
+    }
+  }
+}

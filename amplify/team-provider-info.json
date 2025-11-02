@@ -1,0 +1,42 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yori-dev-02f51-authRole",
+      "UnauthRoleArn": "arn:aws:iam::386851205608:role/amplify-yori-dev-02f51-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::386851205608:role/amplify-yori-dev-02f51-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-yori-dev-02f51-deployment",
+      "UnauthRoleName": "amplify-yori-dev-02f51-unauthRole",
+      "StackName": "amplify-yori-dev-02f51",
+      "StackId": "arn:aws:cloudformation:us-east-1:386851205608:stack/amplify-yori-dev-02f51/b10206e0-b806-11f0-a461-0e2ff02919a1",
+      "AmplifyAppId": "d1pjn1fl1s5pxg"
+    },
+    "categories": {
+      "function": {
+        "createUserProfileWithFirebase": {
+          "firebaseProjectId": "yori-d294c",
+          "firebaseClientEmail": "firebase-adminsdk-fbsvc@yori-d294c.iam.gserviceaccount.com",
+          "plaidClientId": "test",
+          "plaidEnv": "sandbox",
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg"
+        },
+        "getUserProfileByFirebaseUID": {
+          "firebaseProjectId": "yori-d294c",
+          "firebaseClientEmail": "firebase-adminsdk-fbsvc@yori-d294c.iam.gserviceaccount.com",
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg"
+        },
+        "syncPlaidAccounts": {
+          "plaidClientId": "test",
+          "plaidEnv": "sandbox",
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg"
+        },
+        "calculateFinancialSummary": {},
+        "refreshAccountBalances": {
+          "plaidClientId": "test",
+          "plaidEnv": "sandbox",
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg"
+        }
+      }
+    }
+  }
+}
