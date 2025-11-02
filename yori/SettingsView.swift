@@ -142,7 +142,7 @@ struct ConnectedAccountRow: View {
 
             // Account details
             VStack(alignment: .leading, spacing: 2) {
-                Text(account.name)
+                Text(account.accountName)
                     .font(.headline)
 
                 Text(account.institution)
@@ -162,12 +162,12 @@ struct ConnectedAccountRow: View {
     }
 
     private var accountIcon: String {
-        switch account.type.lowercased() {
-        case "checking":
+        switch account.accountType {
+        case .checking:
             return "banknote"
-        case "savings":
+        case .savings:
             return "dollarsign.bank.building"
-        case "credit":
+        case .creditCard:
             return "creditcard"
         default:
             return "building.columns"
@@ -175,12 +175,12 @@ struct ConnectedAccountRow: View {
     }
 
     private var accountColor: Color {
-        switch account.type.lowercased() {
-        case "checking":
+        switch account.accountType {
+        case .checking:
             return .blue
-        case "savings":
+        case .savings:
             return .green
-        case "credit":
+        case .creditCard:
             return .orange
         default:
             return .gray

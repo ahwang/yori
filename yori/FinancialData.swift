@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AssetCategory {
+struct AssetCategory: Codable {
     let name: String
     let amount: Double
     let percentage: Double
@@ -15,7 +15,7 @@ struct AssetCategory {
     let color: String
 }
 
-struct ConnectedAccountSummary {
+struct ConnectedAccountSummary: Codable {
     let id: String
     let name: String
     let balance: Double
@@ -27,6 +27,7 @@ enum AssetType: String, CaseIterable {
     case realEstate = "Real Estate"
     case retirement = "Retirement"
     case crypto = "Cryptocurrency"
+    case liabilities = "Liabilities"
     case other = "Other Assets"
 
     var icon: String {
@@ -41,6 +42,8 @@ enum AssetType: String, CaseIterable {
             return "calendar.badge.clock"
         case .crypto:
             return "bitcoinsign.circle"
+        case .liabilities:
+            return "creditcard"
         case .other:
             return "folder"
         }
@@ -58,6 +61,8 @@ enum AssetType: String, CaseIterable {
             return "purple"
         case .crypto:
             return "yellow"
+        case .liabilities:
+            return "red"
         case .other:
             return "gray"
         }
@@ -66,17 +71,15 @@ enum AssetType: String, CaseIterable {
 
 extension ConnectedAccount {
     var assetType: AssetType {
-        switch accountType.lowercased() {
-        case "checking", "savings":
+        switch accountType {
+        case .checking, .savings:
             return .cashAndSavings
-        case "investment", "brokerage":
+        case .investment:
             return .investments
-        case "mortgage":
-            return .realEstate
-        case "401k", "ira", "retirement":
+        case .retirement:
             return .retirement
-        case "crypto":
-            return .crypto
+        case .creditCard, .loan, .mortgage:
+            return .liabilities
         default:
             return .other
         }

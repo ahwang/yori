@@ -39,7 +39,7 @@ class AmplifyAPIService {
                 return try await createUserProfile(firebaseUID: user.uid, email: user.email, displayName: user.displayName)
             }
         case .failure(let error):
-            throw APIError.amplifyError(error)
+            throw error
         }
     }
 
@@ -50,12 +50,14 @@ class AmplifyAPIService {
             displayName: displayName,
             onboardingCompleted: false,
             hasConnectedAccounts: false,
-            preferredCurrency: "USD"
+            preferredCurrency: "USD",
+            createdAt: Temporal.DateTime.now(),
+            updatedAt: Temporal.DateTime.now()
         )
 
         let request = GraphQLRequest<UserProfile>(
             document: createUserProfileMutation,
-            variables: userProfile.graphQLVariables,
+//            variables: userProfile.graphQLVariables,
             responseType: UserProfile.self
         )
 
@@ -65,14 +67,14 @@ class AmplifyAPIService {
         case .success(let createdProfile):
             return createdProfile
         case .failure(let error):
-            throw APIError.amplifyError(error)
+            throw error
         }
     }
 
     func updateUserProfile(_ userProfile: UserProfile) async throws -> UserProfile {
         let request = GraphQLRequest<UserProfile>(
             document: updateUserProfileMutation,
-            variables: userProfile.graphQLVariables,
+//            variables: userProfile.graphQLVariables,
             responseType: UserProfile.self
         )
 
@@ -82,7 +84,7 @@ class AmplifyAPIService {
         case .success(let updatedProfile):
             return updatedProfile
         case .failure(let error):
-            throw APIError.amplifyError(error)
+            throw error
         }
     }
 
@@ -103,7 +105,7 @@ class AmplifyAPIService {
         case .success(let accounts):
             return accounts
         case .failure(let error):
-            throw APIError.amplifyError(error)
+            throw error
         }
     }
 
@@ -130,7 +132,7 @@ class AmplifyAPIService {
 
             return accounts
         case .failure(let error):
-            throw APIError.amplifyError(error)
+            throw error
         }
     }
 
@@ -147,7 +149,7 @@ class AmplifyAPIService {
         case .success(_):
             return
         case .failure(let error):
-            throw APIError.amplifyError(error)
+            throw error
         }
     }
 
@@ -168,8 +170,7 @@ class AmplifyAPIService {
         switch getResult {
         case .success(let existingSummary):
             if let summary = existingSummary,
-               let calculatedAt = summary.calculatedAt,
-               Calendar.current.isDateInToday(calculatedAt) {
+               Calendar.current.isDateInToday(summary.calculatedAt.foundationDate) {
                 // Return existing summary if calculated today
                 return summary
             } else {
@@ -177,7 +178,7 @@ class AmplifyAPIService {
                 return try await calculateFinancialSummary(for: userProfile.id)
             }
         case .failure(let error):
-            throw APIError.amplifyError(error)
+            throw error
         }
     }
 
@@ -194,7 +195,7 @@ class AmplifyAPIService {
         case .success(let summary):
             return summary
         case .failure(let error):
-            throw APIError.amplifyError(error)
+            throw error
         }
     }
 }
@@ -319,67 +320,16 @@ mutation CalculateFinancialSummary($userProfileID: ID!) {
 }
 """
 
-// MARK: - Data Models for Amplify
-
-struct UserProfile {
-    let id: String
-    let firebaseUID: String
-    let email: String?
-    let displayName: String?
-    var onboardingCompleted: Bool
-    var hasConnectedAccounts: Bool
-    let preferredCurrency: String?
-    let createdAt: Date?
-    let updatedAt: Date?
-
-    var graphQLVariables: [String: Any] {
-        var variables: [String: Any] = [
-            "firebaseUID": firebaseUID,
-            "onboardingCompleted": onboardingCompleted,
-            "hasConnectedAccounts": hasConnectedAccounts
-        ]
-
-        if let email = email { variables["email"] = email }
-        if let displayName = displayName { variables["displayName"] = displayName }
-        if let preferredCurrency = preferredCurrency { variables["preferredCurrency"] = preferredCurrency }
-
-        return ["input": variables]
-    }
-}
-
-struct ConnectedAccount {
-    let id: String
-    let userProfileID: String?
-    let accountName: String
-    let accountType: String
-    let balance: Double
-    let institution: String
-    let plaidAccountID: String?
-    let isActive: Bool
-    let lastSynced: Date?
-    let createdAt: Date?
-    let updatedAt: Date?
-}
-
-struct FinancialSummary {
-    let id: String?
-    let netWorth: Double
-    let totalAssets: Double
-    let totalLiabilities: Double
-    let netWorthChangePercent: Double?
-    let assetBreakdown: [AssetCategory]
-    let calculatedAt: Date?
-    let createdAt: Date?
-    let updatedAt: Date?
-}
+// MARK: - Note: Data models are now generated in API.swift
+// This service uses the generated GraphQL models from Amplify codegen
 
 // MARK: - API Error Extension
 
-extension APIError {
-    static func amplifyError(_ error: GraphQLError) -> APIError {
-        return .decodingError(error)
-    }
-}
+//extension APIError {
+//    static func amplifyError<T>(_ error: GraphQLResponseError<T>) -> APIError {
+//        return .decodingError(error)
+//    }
+//}
 
 // MARK: - Date Extensions for GraphQL
 

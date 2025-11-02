@@ -1,0 +1,179 @@
+
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:19:50: error: 'UserProfile' is ambiguous for type lookup in this context
+    func getCurrentUserProfile() async throws -> UserProfile {
+                                                 ^~~~~~~~~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:324:8: note: found this candidate
+struct UserProfile {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: found this candidate
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:46:103: error: 'UserProfile' is ambiguous for type lookup in this context
+    func createUserProfile(firebaseUID: String, email: String?, displayName: String?) async throws -> UserProfile {
+                                                                                                      ^~~~~~~~~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:324:8: note: found this candidate
+struct UserProfile {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: found this candidate
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:72:72: error: 'UserProfile' is ambiguous for type lookup in this context
+    func updateUserProfile(_ userProfile: UserProfile) async throws -> UserProfile {
+                                                                       ^~~~~~~~~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:324:8: note: found this candidate
+struct UserProfile {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: found this candidate
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:72:43: error: 'UserProfile' is ambiguous for type lookup in this context
+    func updateUserProfile(_ userProfile: UserProfile) async throws -> UserProfile {
+                                          ^~~~~~~~~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:324:8: note: found this candidate
+struct UserProfile {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: found this candidate
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:324:8: error: invalid redeclaration of 'UserProfile'
+struct UserProfile {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: 'UserProfile' previously declared here
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: 'UserProfile' previously declared here
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:71:43: error: 'UserProfile' is ambiguous for type lookup in this context
+    func getUserProfile() async throws -> UserProfile {
+                                          ^~~~~~~~~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:324:8: note: found this candidate
+struct UserProfile {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: found this candidate
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:78:68: error: 'UserProfile' is ambiguous for type lookup in this context
+    func updateUserProfile(_ profile: UserProfile) async throws -> UserProfile {
+                                                                   ^~~~~~~~~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:324:8: note: found this candidate
+struct UserProfile {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: found this candidate
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:78:39: error: 'UserProfile' is ambiguous for type lookup in this context
+    func updateUserProfile(_ profile: UserProfile) async throws -> UserProfile {
+                                      ^~~~~~~~~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/AmplifyAPIService.swift:324:8: note: found this candidate
+struct UserProfile {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:180:8: note: found this candidate
+struct UserProfile: Codable {
+       ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:189:8: error: type 'AccountsResponse' does not conform to protocol 'Decodable'
+struct AccountsResponse: Codable {
+       ^
+Swift.Decodable.init:2:1: note: protocol requires initializer 'init(from:)' with type 'Decodable'
+init(from decoder: any Decoder) throws}
+^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:190:9: note: cannot automatically synthesize 'Decodable' because '[ConnectedAccount]' does not conform to 'Decodable'
+    let accounts: [ConnectedAccount]
+        ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:189:8: error: type 'AccountsResponse' does not conform to protocol 'Decodable'
+struct AccountsResponse: Codable {
+       ^
+Swift.Decodable.init:2:1: note: protocol requires initializer 'init(from:)' with type 'Decodable'
+init(from decoder: any Decoder) throws}
+^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:190:9: note: cannot automatically synthesize 'Decodable' because '[ConnectedAccount]' does not conform to 'Decodable'
+    let accounts: [ConnectedAccount]
+        ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:189:8: error: type 'AccountsResponse' does not conform to protocol 'Encodable'
+struct AccountsResponse: Codable {
+       ^
+Swift.Encodable.encode:2:6: note: protocol requires function 'encode(to:)' with type 'Encodable'
+func encode(to encoder: any Encoder) throws}
+     ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:190:9: note: cannot automatically synthesize 'Encodable' because '[ConnectedAccount]' does not conform to 'Encodable'
+    let accounts: [ConnectedAccount]
+        ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:189:8: error: type 'AccountsResponse' does not conform to protocol 'Encodable'
+struct AccountsResponse: Codable {
+       ^
+Swift.Encodable.encode:2:6: note: protocol requires function 'encode(to:)' with type 'Encodable'
+func encode(to encoder: any Encoder) throws}
+     ^
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/APIService.swift:190:9: note: cannot automatically synthesize 'Encodable' because '[ConnectedAccount]' does not conform to 'Encodable'
+    let accounts: [ConnectedAccount]
+        ^
+
+SwiftCompile normal arm64 Compiling\ OnboardingCoordinator.swift,\ OnboardingWelcomeView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/OnboardingCoordinator.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/OnboardingWelcomeView.swift (in target 'yori' from project 'yori')
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/OnboardingCoordinator.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/OnboardingWelcomeView.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+
+SwiftCompile normal arm64 Compiling\ DashboardView.swift,\ FinancialData.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/DashboardView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/FinancialData.swift (in target 'yori' from project 'yori')
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/DashboardView.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/FinancialData.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+
+SwiftCompile normal arm64 Compiling\ ContentView.swift,\ DashboardCards.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/ContentView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/DashboardCards.swift (in target 'yori' from project 'yori')
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/ContentView.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/DashboardCards.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+
+SwiftCompile normal arm64 Compiling\ SettingsView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/SettingsView.swift (in target 'yori' from project 'yori')
+Failed frontend command:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -c /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AccountSelectionView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AccountsView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AmplifyAPIService.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/APIService.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AppCoordinator.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AuthenticationView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/ContentView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/DashboardCards.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/DashboardView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/FinancialData.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/OnboardingCoordinator.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/OnboardingWelcomeView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/PlaidConnectionView.swift -primary-file /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/SettingsView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/yoriApp.swift /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/DerivedSources/GeneratedAssetSymbols.swift -emit-dependencies-path /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64/SettingsView.d -emit-const-values-path /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64/SettingsView.swiftconstvalues -emit-reference-dependencies-path /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64/SettingsView.swiftdeps -serialize-diagnostics-path /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64/SettingsView.dia -emit-localized-strings -emit-localized-strings-path /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64 -target arm64-apple-ios18.0 -module-can-import-version DeveloperToolsSupport 23.0.4 23.0.4 -module-can-import-version SwiftUI 7.0.84.1 7.0.84 -module-can-import-version UIKit 9088.1.113 9088.1.113 -disable-cross-import-overlay-search -swift-module-cross-import AuthenticationServices /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Cryptexes/OS/System/Library/Frameworks/AuthenticationServices.framework/Modules/AuthenticationServices.swiftcrossimport/SwiftUI.swiftoverlay -swift-module-cross-import AuthenticationServices /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/AuthenticationServices.framework/Modules/AuthenticationServices.swiftcrossimport/SwiftUI.swiftoverlay -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libFoundationMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#FoundationMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libObservationMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#ObservationMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libPreviewsMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#PreviewsMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftUIMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftUIMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64/yori-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -I /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/PackageFrameworks -F /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=5 -module-cache-path /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -swift-version 5 -enforce-exclusivity\=checked -Onone -D DEBUG -serialize-debugging-options -const-gather-protocols-file /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64/yori_const_extract_protocols.json -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -default-isolation\=MainActor -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file /Users/andrewhwang/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /Users/andrewhwang/Documents/Coding\ Projects/yori -enable-anonymous-context-mangled-names -file-compilation-dir /Users/andrewhwang/Documents/Coding\ Projects/yori -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/RecaptchaInterop.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/FirebaseCoreExtension.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/FirebaseAuthInternal.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/FirebaseAuthInterop.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/FirebaseAppCheckInterop.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleUtilities-Network.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleUtilities-NSData.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleUtilities-AppDelegateSwizzler.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleUtilities-Reachability.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleDataTransport.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/nanopb.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/FirebaseInstallations.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/FirebaseCore.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/FirebaseMessaging.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/AppAuth.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/AppAuthCore.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleUtilities-Logger.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleUtilities-Environment.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/third-party-IsAppEncrypted.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleUtilities-UserDefaults.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/AppCheckCore.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GTMSessionFetcherCore.modulemap -Xcc -fmodule-map-file\=/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/GeneratedModuleMaps-iphoneos/GoogleSignIn.modulemap -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -ivfsstatcache -Xcc /Users/andrewhwang/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.0-23A339-81ce72e5b06c9602b9d30b56f2eed08a.sdkstatcache -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/yori-generated-files.hmap -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/yori-own-target-headers.hmap -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/yori-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori-948d30ac9510f4165aa025624c95d17b-VFS-iphoneos/all-product-headers.yaml -Xcc -iquote -Xcc /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/yori-project-headers.hmap -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/interop-ios-for-google-sdks/RecaptchaEnterprise/RecaptchaInterop/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/firebase-ios-sdk/FirebaseCore/Extension -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/firebase-ios-sdk/FirebaseAuth/Sources/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/firebase-ios-sdk/FirebaseAuth/Interop/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/firebase-ios-sdk/FirebaseAppCheck/Interop/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/Network/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/NSData+zlib/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/AppDelegateSwizzler/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/Reachability/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleDataTransport/GoogleDataTransport/GDTCORLibrary/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/nanopb/spm_headers -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/firebase-ios-sdk/FirebaseInstallations/Source/Library/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/firebase-ios-sdk/FirebaseCore/Sources/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/firebase-ios-sdk/CoreOnly/Sources -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/firebase-ios-sdk/FirebaseMessaging/Sources/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/AppAuth-iOS/Sources/AppAuth -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/AppAuth-iOS/Sources/AppAuthCore -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/promises/Sources/FBLPromises/include -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/Logger/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/Environment/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleUtilities/third_party/IsAppEncrypted/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/UserDefaults/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/gtm-session-fetcher/Sources/Core/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/SourcePackages/checkouts/GoogleSignIn-iOS/GoogleSignIn/Sources/Public -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Products/Debug-iphoneos/include -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/DerivedSources-normal/arm64 -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/DerivedSources/arm64 -Xcc -I/Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/DerivedSources -Xcc -DDEBUG\=1 -no-auto-bridging-header-chaining -module-name yori -frontend-parseable-output -disable-clang-spi -target-sdk-version 26.0 -target-sdk-name iphoneos26.0 -clang-target arm64-apple-ios26.0 -in-process-plugin-server-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -o /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Build/Intermediates.noindex/yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64/SettingsView.o -index-unit-output-path /yori.build/Debug-iphoneos/yori.build/Objects-normal/arm64/SettingsView.o -index-store-path /Users/andrewhwang/Library/Developer/Xcode/DerivedData/yori-dnsuhlheoqrhqaebauapacaruntq/Index.noindex/DataStore -index-system-modules
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/SettingsView.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/SettingsView.swift:145:30: error: value of type 'ConnectedAccount' has no member 'name'
+                Text(account.name)
+                     ~~~~~~~ ^~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/SettingsView.swift:165:24: error: value of type 'ConnectedAccount' has no member 'type'
+        switch account.type.lowercased() {
+               ~~~~~~~ ^~~~
+/Users/andrewhwang/Documents/Coding Projects/yori/yori/SettingsView.swift:178:24: error: value of type 'ConnectedAccount' has no member 'type'
+        switch account.type.lowercased() {
+               ~~~~~~~ ^~~~
+
+SwiftCompile normal arm64 Compiling\ AppCoordinator.swift,\ AuthenticationView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AppCoordinator.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AuthenticationView.swift (in target 'yori' from project 'yori')
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AppCoordinator.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+
+SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/AuthenticationView.swift (in target 'yori' from project 'yori')
+    cd /Users/andrewhwang/Documents/Coding\ Projects/yori
+    
+
+SwiftCompile normal arm64 Compiling\ PlaidConnectionView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/PlaidConnectionView.swift (in target 'yori' from project 'yori')
+
+** BUILD FAILED **
+
+
+The following build commands failed:
+	SwiftEmitModule normal arm64 Emitting\ module\ for\ yori (in target 'yori' from project 'yori')
+	EmitSwiftModule normal arm64 (in target 'yori' from project 'yori')
+	SwiftCompile normal arm64 Compiling\ SettingsView.swift /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/SettingsView.swift (in target 'yori' from project 'yori')
+	SwiftCompile normal arm64 /Users/andrewhwang/Documents/Coding\ Projects/yori/yori/SettingsView.swift (in target 'yori' from project 'yori')
+	Building project yori with scheme yori
+(5 failures)

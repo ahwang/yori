@@ -1,13 +1,13 @@
 # Yori Financial Planning App GraphQL Schema
 # Supports Firebase Authentication integration with AWS Amplify backend
 
-# Authorization: Use Firebase JWT tokens for authentication
-input AMPLIFY { globalAuthRule: AuthRule = { allow: private } }
+# Authorization: Use API key with Firebase JWT validation in Lambda functions
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
 
 # User Profile - Core user data linked to Firebase UID
 type UserProfile @model
   @auth(rules: [
-    { allow: private, operations: [create, read, update, delete] }
+    { allow: public, operations: [create, read, update, delete] }
   ]) {
   id: ID!
   firebaseUID: String! @index(name: "byFirebaseUID")
@@ -28,7 +28,7 @@ type UserProfile @model
 # Connected Accounts - Bank accounts linked via Plaid or manual entry
 type ConnectedAccount @model
   @auth(rules: [
-    { allow: private, operations: [create, read, update, delete] }
+    { allow: public, operations: [create, read, update, delete] }
   ]) {
   id: ID!
   userProfileID: ID! @index(name: "byUserProfile")
@@ -50,7 +50,7 @@ type ConnectedAccount @model
 # Plaid Tokens - Secure storage of Plaid access tokens per institution
 type PlaidToken @model
   @auth(rules: [
-    { allow: private, operations: [create, read, update, delete] }
+    { allow: public, operations: [create, read, update, delete] }
   ]) {
   id: ID!
   userProfileID: ID! @index(name: "byUserProfile")
@@ -70,7 +70,7 @@ type PlaidToken @model
 # Financial Summary - Calculated financial overview
 type FinancialSummary @model
   @auth(rules: [
-    { allow: private, operations: [create, read, update, delete] }
+    { allow: public, operations: [create, read, update, delete] }
   ]) {
   id: ID!
   userProfileID: ID! @index(name: "byUserProfile")

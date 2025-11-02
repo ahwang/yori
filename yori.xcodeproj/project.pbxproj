@@ -7,23 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07585AAE8A95742DEF9B0BAA /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0839381237791702AD1836 /* AccountType.swift */; };
+		3F3D3F15656C0BA9E327EF8C /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16ACEB9E897EF85ED3F9F8DC /* AmplifyModels.swift */; };
+		422A4A1EC80C1E702EDA9F38 /* PlaidToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3C90DDC2E001CDACA7CF86 /* PlaidToken.swift */; };
+		52BCC6747B3A6B5A1F0FF808 /* FinancialSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DF6C1299034880EFCBF3F /* FinancialSummary.swift */; };
+		62F96CF195CF86BB3032CE35 /* ConnectedAccount+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE833B2A461BE53C30BA2DAD /* ConnectedAccount+Schema.swift */; };
+		6BEEDED6DC9ABD788BC42DF2 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEDEF84ABD9B496FE38B6D9 /* UserProfile.swift */; };
+		7B0F0A59435C145CAE2C32D5 /* ConnectedAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC57B306EC320E3D1D03555 /* ConnectedAccount.swift */; };
 		8117F5222EB6A87100481BC8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8117F5212EB6A87100481BC8 /* FirebaseMessaging */; };
+		814C75C72EB7DD4A00F8FDF9 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 814C75C62EB7DD4A00F8FDF9 /* Amplify */; };
+		814C76082EB7E7B800F8FDF9 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 814C76072EB7E7B800F8FDF9 /* AWSAPIPlugin */; };
 		81F25AC02EB69A18006BCAD2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25ABF2EB69A18006BCAD2 /* FirebaseAuth */; };
 		81F25AC22EB69A18006BCAD2 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25AC12EB69A18006BCAD2 /* FirebaseCore */; };
 		81F25AC52EB69C96006BCAD2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25AC42EB69C96006BCAD2 /* GoogleSignIn */; };
 		81F25AC72EB69C96006BCAD2 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25AC62EB69C96006BCAD2 /* GoogleSignInSwift */; };
 		9758114CBC528AAE671C2525 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B008A9C51564F117DEDE4631 /* awsconfiguration.json */; };
+		9901CDF241D28214222E8725 /* PlaidToken+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86CEC296B57C8D109BFBC8B /* PlaidToken+Schema.swift */; };
+		CA7893306A1EBCD1F10CCD7D /* FinancialSummary+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A68AE5701BC8FFAC1DB9B /* FinancialSummary+Schema.swift */; };
+		D883647F960F00976364BD31 /* UserProfile+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CF2B05358D2AC66BF07CE6 /* UserProfile+Schema.swift */; };
 		E2012E656003C0CCD6CFCD7B /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 1053A870C48BB537AED81B93 /* amplifyconfiguration.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1053A870C48BB537AED81B93 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		047DF6C1299034880EFCBF3F /* FinancialSummary.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = FinancialSummary.swift; path = amplify/generated/models/FinancialSummary.swift; sourceTree = "<group>"; };
+		1053A870C48BB537AED81B93 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		16ACEB9E897EF85ED3F9F8DC /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
+		4DEDEF84ABD9B496FE38B6D9 /* UserProfile.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = UserProfile.swift; path = amplify/generated/models/UserProfile.swift; sourceTree = "<group>"; };
 		811400612EB679BA00DB6C8C /* yori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yori.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B008A9C51564F117DEDE4631 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; lastKnownFileType = text.json; name = awsconfiguration.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		B008A9C51564F117DEDE4631 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		BE833B2A461BE53C30BA2DAD /* ConnectedAccount+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ConnectedAccount+Schema.swift"; path = "amplify/generated/models/ConnectedAccount+Schema.swift"; sourceTree = "<group>"; };
+		C6CF2B05358D2AC66BF07CE6 /* UserProfile+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "UserProfile+Schema.swift"; path = "amplify/generated/models/UserProfile+Schema.swift"; sourceTree = "<group>"; };
+		CBC57B306EC320E3D1D03555 /* ConnectedAccount.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = ConnectedAccount.swift; path = amplify/generated/models/ConnectedAccount.swift; sourceTree = "<group>"; };
+		E07A68AE5701BC8FFAC1DB9B /* FinancialSummary+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "FinancialSummary+Schema.swift"; path = "amplify/generated/models/FinancialSummary+Schema.swift"; sourceTree = "<group>"; };
+		E86CEC296B57C8D109BFBC8B /* PlaidToken+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "PlaidToken+Schema.swift"; path = "amplify/generated/models/PlaidToken+Schema.swift"; sourceTree = "<group>"; };
+		EA0839381237791702AD1836 /* AccountType.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AccountType.swift; path = amplify/generated/models/AccountType.swift; sourceTree = "<group>"; };
+		EF3C90DDC2E001CDACA7CF86 /* PlaidToken.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = PlaidToken.swift; path = amplify/generated/models/PlaidToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		811400782EB67D0600DB6C8C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		811400782EB67D0600DB6C8C /* Exceptions for "yori" folder in "yori" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -36,7 +58,7 @@
 		811400632EB679BA00DB6C8C /* yori */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				811400782EB67D0600DB6C8C /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+				811400782EB67D0600DB6C8C /* Exceptions for "yori" folder in "yori" target */,
 			);
 			path = yori;
 			sourceTree = "<group>";
@@ -50,7 +72,9 @@
 			files = (
 				81F25AC22EB69A18006BCAD2 /* FirebaseCore in Frameworks */,
 				81F25AC02EB69A18006BCAD2 /* FirebaseAuth in Frameworks */,
+				814C76082EB7E7B800F8FDF9 /* AWSAPIPlugin in Frameworks */,
 				8117F5222EB6A87100481BC8 /* FirebaseMessaging in Frameworks */,
+				814C75C72EB7DD4A00F8FDF9 /* Amplify in Frameworks */,
 				81F25AC52EB69C96006BCAD2 /* GoogleSignIn in Frameworks */,
 				81F25AC72EB69C96006BCAD2 /* GoogleSignInSwift in Frameworks */,
 			);
@@ -59,12 +83,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17009774E2567E91F9AF57E3 /* AmplifyModels */ = {
+			isa = PBXGroup;
+			children = (
+				EA0839381237791702AD1836 /* AccountType.swift */,
+				16ACEB9E897EF85ED3F9F8DC /* AmplifyModels.swift */,
+				BE833B2A461BE53C30BA2DAD /* ConnectedAccount+Schema.swift */,
+				CBC57B306EC320E3D1D03555 /* ConnectedAccount.swift */,
+				E07A68AE5701BC8FFAC1DB9B /* FinancialSummary+Schema.swift */,
+				047DF6C1299034880EFCBF3F /* FinancialSummary.swift */,
+				E86CEC296B57C8D109BFBC8B /* PlaidToken+Schema.swift */,
+				EF3C90DDC2E001CDACA7CF86 /* PlaidToken.swift */,
+				C6CF2B05358D2AC66BF07CE6 /* UserProfile+Schema.swift */,
+				4DEDEF84ABD9B496FE38B6D9 /* UserProfile.swift */,
+			);
+			name = AmplifyModels;
+			sourceTree = "<group>";
+		};
 		811400582EB679BA00DB6C8C = {
 			isa = PBXGroup;
 			children = (
 				811400632EB679BA00DB6C8C /* yori */,
 				811400622EB679BA00DB6C8C /* Products */,
 				874240D9F509E82633919C4E /* AmplifyConfig */,
+				17009774E2567E91F9AF57E3 /* AmplifyModels */,
+				814C76062EB7E7B800F8FDF9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +117,13 @@
 				811400612EB679BA00DB6C8C /* yori.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		814C76062EB7E7B800F8FDF9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		874240D9F509E82633919C4E /* AmplifyConfig */ = {
@@ -110,6 +160,8 @@
 				81F25AC42EB69C96006BCAD2 /* GoogleSignIn */,
 				81F25AC62EB69C96006BCAD2 /* GoogleSignInSwift */,
 				8117F5212EB6A87100481BC8 /* FirebaseMessaging */,
+				814C75C62EB7DD4A00F8FDF9 /* Amplify */,
+				814C76072EB7E7B800F8FDF9 /* AWSAPIPlugin */,
 			);
 			productName = yori;
 			productReference = 811400612EB679BA00DB6C8C /* yori.app */;
@@ -142,6 +194,7 @@
 			packageReferences = (
 				81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				81F25AC32EB69C96006BCAD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				814C75C52EB7DD4A00F8FDF9 /* XCRemoteSwiftPackageReference "amplify-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 811400622EB679BA00DB6C8C /* Products */;
@@ -170,6 +223,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07585AAE8A95742DEF9B0BAA /* AccountType.swift in Sources */,
+				3F3D3F15656C0BA9E327EF8C /* AmplifyModels.swift in Sources */,
+				62F96CF195CF86BB3032CE35 /* ConnectedAccount+Schema.swift in Sources */,
+				7B0F0A59435C145CAE2C32D5 /* ConnectedAccount.swift in Sources */,
+				CA7893306A1EBCD1F10CCD7D /* FinancialSummary+Schema.swift in Sources */,
+				52BCC6747B3A6B5A1F0FF808 /* FinancialSummary.swift in Sources */,
+				9901CDF241D28214222E8725 /* PlaidToken+Schema.swift in Sources */,
+				422A4A1EC80C1E702EDA9F38 /* PlaidToken.swift in Sources */,
+				D883647F960F00976364BD31 /* UserProfile+Schema.swift in Sources */,
+				6BEEDED6DC9ABD788BC42DF2 /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +462,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		814C75C52EB7DD4A00F8FDF9 /* XCRemoteSwiftPackageReference "amplify-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.51.4;
+			};
+		};
 		81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -422,6 +493,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		814C75C62EB7DD4A00F8FDF9 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 814C75C52EB7DD4A00F8FDF9 /* XCRemoteSwiftPackageReference "amplify-swift" */;
+			productName = Amplify;
+		};
+		814C76072EB7E7B800F8FDF9 /* AWSAPIPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 814C75C52EB7DD4A00F8FDF9 /* XCRemoteSwiftPackageReference "amplify-swift" */;
+			productName = AWSAPIPlugin;
 		};
 		81F25ABF2EB69A18006BCAD2 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,0 +1,1504 @@
+# this is an auto generated file. This will be overwritten
+
+subscription OnCreateUserProfile(
+  $filter: ModelSubscriptionUserProfileFilterInput
+) {
+  onCreateUserProfile(filter: $filter) {
+    id
+    firebaseUID
+    email
+    displayName
+    onboardingCompleted
+    hasConnectedAccounts
+    preferredCurrency
+    createdAt
+    updatedAt
+    connectedAccounts {
+      items {
+        id
+        userProfileID
+        accountName
+        accountType
+        balance
+        institution
+        plaidAccountID
+        plaidItemID
+        isActive
+        lastSynced
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    financialSummaries {
+      items {
+        id
+        userProfileID
+        netWorth
+        totalAssets
+        totalLiabilities
+        netWorthChangePercent
+        assetBreakdown
+        calculatedAt
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    plaidTokens {
+      items {
+        id
+        userProfileID
+        itemID
+        accessToken
+        institutionID
+        institutionName
+        isActive
+        lastUsed
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnUpdateUserProfile(
+  $filter: ModelSubscriptionUserProfileFilterInput
+) {
+  onUpdateUserProfile(filter: $filter) {
+    id
+    firebaseUID
+    email
+    displayName
+    onboardingCompleted
+    hasConnectedAccounts
+    preferredCurrency
+    createdAt
+    updatedAt
+    connectedAccounts {
+      items {
+        id
+        userProfileID
+        accountName
+        accountType
+        balance
+        institution
+        plaidAccountID
+        plaidItemID
+        isActive
+        lastSynced
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    financialSummaries {
+      items {
+        id
+        userProfileID
+        netWorth
+        totalAssets
+        totalLiabilities
+        netWorthChangePercent
+        assetBreakdown
+        calculatedAt
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    plaidTokens {
+      items {
+        id
+        userProfileID
+        itemID
+        accessToken
+        institutionID
+        institutionName
+        isActive
+        lastUsed
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnDeleteUserProfile(
+  $filter: ModelSubscriptionUserProfileFilterInput
+) {
+  onDeleteUserProfile(filter: $filter) {
+    id
+    firebaseUID
+    email
+    displayName
+    onboardingCompleted
+    hasConnectedAccounts
+    preferredCurrency
+    createdAt
+    updatedAt
+    connectedAccounts {
+      items {
+        id
+        userProfileID
+        accountName
+        accountType
+        balance
+        institution
+        plaidAccountID
+        plaidItemID
+        isActive
+        lastSynced
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    financialSummaries {
+      items {
+        id
+        userProfileID
+        netWorth
+        totalAssets
+        totalLiabilities
+        netWorthChangePercent
+        assetBreakdown
+        calculatedAt
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    plaidTokens {
+      items {
+        id
+        userProfileID
+        itemID
+        accessToken
+        institutionID
+        institutionName
+        isActive
+        lastUsed
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnCreateConnectedAccount(
+  $filter: ModelSubscriptionConnectedAccountFilterInput
+) {
+  onCreateConnectedAccount(filter: $filter) {
+    id
+    userProfileID
+    accountName
+    accountType
+    balance
+    institution
+    plaidAccountID
+    plaidItemID
+    isActive
+    lastSynced
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnUpdateConnectedAccount(
+  $filter: ModelSubscriptionConnectedAccountFilterInput
+) {
+  onUpdateConnectedAccount(filter: $filter) {
+    id
+    userProfileID
+    accountName
+    accountType
+    balance
+    institution
+    plaidAccountID
+    plaidItemID
+    isActive
+    lastSynced
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnDeleteConnectedAccount(
+  $filter: ModelSubscriptionConnectedAccountFilterInput
+) {
+  onDeleteConnectedAccount(filter: $filter) {
+    id
+    userProfileID
+    accountName
+    accountType
+    balance
+    institution
+    plaidAccountID
+    plaidItemID
+    isActive
+    lastSynced
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnCreatePlaidToken(
+  $filter: ModelSubscriptionPlaidTokenFilterInput
+) {
+  onCreatePlaidToken(filter: $filter) {
+    id
+    userProfileID
+    itemID
+    accessToken
+    institutionID
+    institutionName
+    isActive
+    lastUsed
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnUpdatePlaidToken(
+  $filter: ModelSubscriptionPlaidTokenFilterInput
+) {
+  onUpdatePlaidToken(filter: $filter) {
+    id
+    userProfileID
+    itemID
+    accessToken
+    institutionID
+    institutionName
+    isActive
+    lastUsed
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnDeletePlaidToken(
+  $filter: ModelSubscriptionPlaidTokenFilterInput
+) {
+  onDeletePlaidToken(filter: $filter) {
+    id
+    userProfileID
+    itemID
+    accessToken
+    institutionID
+    institutionName
+    isActive
+    lastUsed
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnCreateFinancialSummary(
+  $filter: ModelSubscriptionFinancialSummaryFilterInput
+) {
+  onCreateFinancialSummary(filter: $filter) {
+    id
+    userProfileID
+    netWorth
+    totalAssets
+    totalLiabilities
+    netWorthChangePercent
+    assetBreakdown
+    calculatedAt
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnUpdateFinancialSummary(
+  $filter: ModelSubscriptionFinancialSummaryFilterInput
+) {
+  onUpdateFinancialSummary(filter: $filter) {
+    id
+    userProfileID
+    netWorth
+    totalAssets
+    totalLiabilities
+    netWorthChangePercent
+    assetBreakdown
+    calculatedAt
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+subscription OnDeleteFinancialSummary(
+  $filter: ModelSubscriptionFinancialSummaryFilterInput
+) {
+  onDeleteFinancialSummary(filter: $filter) {
+    id
+    userProfileID
+    netWorth
+    totalAssets
+    totalLiabilities
+    netWorthChangePercent
+    assetBreakdown
+    calculatedAt
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}

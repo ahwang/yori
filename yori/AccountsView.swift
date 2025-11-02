@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Amplify
 
 struct AccountsView: View {
     @State private var connectedAccounts: [ConnectedAccount] = []
@@ -177,29 +178,29 @@ struct AccountsView: View {
         connectedAccounts = [
             ConnectedAccount(
                 id: "acc_1",
-                userProfileID: nil,
                 accountName: "Chase Checking",
-                accountType: "checking",
+                accountType: .checking,
                 balance: 2450.30,
                 institution: "Chase Bank",
-                plaidAccountID: nil,
+                plaidAccountID: "Chase Bank",
+                plaidItemID: nil,
                 isActive: true,
                 lastSynced: nil,
-                createdAt: nil,
-                updatedAt: nil
+                createdAt: Temporal.DateTime.now(),
+                updatedAt: Temporal.DateTime.now()
             ),
             ConnectedAccount(
                 id: "acc_2",
-                userProfileID: nil,
                 accountName: "Wells Fargo Savings",
-                accountType: "savings",
+                accountType: .savings,
                 balance: 8750.50,
                 institution: "Wells Fargo",
                 plaidAccountID: nil,
+                plaidItemID: nil,
                 isActive: true,
-                lastSynced: nil,
-                createdAt: nil,
-                updatedAt: nil
+                lastSynced: Temporal.DateTime.now(),
+                createdAt: Temporal.DateTime.now(),
+                updatedAt: Temporal.DateTime.now()
             )
         ]
     }
@@ -257,7 +258,7 @@ struct AccountManagementRow: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
-                    Text(account.accountType.capitalized)
+                    Text(account.accountType.rawValue.capitalized)
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 2)
@@ -326,12 +327,12 @@ struct AccountManagementRow: View {
     }
 
     private var accountIcon: String {
-        switch account.accountType.lowercased() {
-        case "checking":
+        switch account.accountType {
+        case .checking:
             return "banknote"
-        case "savings":
+        case .savings:
             return "dollarsign.bank.building"
-        case "credit":
+        case .creditCard:
             return "creditcard"
         default:
             return "building.columns"
@@ -339,12 +340,12 @@ struct AccountManagementRow: View {
     }
 
     private var accountColor: Color {
-        switch account.accountType.lowercased() {
-        case "checking":
+        switch account.accountType {
+        case .checking:
             return .blue
-        case "savings":
+        case .savings:
             return .green
-        case "credit":
+        case .creditCard:
             return .orange
         default:
             return .gray

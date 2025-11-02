@@ -1,0 +1,17 @@
+projects:
+  yori:
+    schemaPath: graphql/schema.json
+    includes:
+      - src/graphql/**/*.graphql
+    excludes:
+      - ./amplify/**
+      - API.swift
+    extensions:
+      amplify:
+        codeGenTarget: swift
+        generatedFileName: API.swift
+        docsFilePath: src/graphql
+        maxDepth: 5
+extensions:
+  amplify:
+    version: 3

@@ -18,24 +18,42 @@
           "firebaseClientEmail": "firebase-adminsdk-fbsvc@yori-d294c.iam.gserviceaccount.com",
           "plaidClientId": "test",
           "plaidEnv": "sandbox",
-          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg"
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-dev-02f51-deployment",
+          "s3Key": "amplify-builds/createUserProfileWithFirebase-72486b337443684d5447-build.zip"
         },
         "getUserProfileByFirebaseUID": {
           "firebaseProjectId": "yori-d294c",
           "firebaseClientEmail": "firebase-adminsdk-fbsvc@yori-d294c.iam.gserviceaccount.com",
-          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg"
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-dev-02f51-deployment",
+          "s3Key": "amplify-builds/getUserProfileByFirebaseUID-52556266564161446f74-build.zip"
         },
         "syncPlaidAccounts": {
           "plaidClientId": "test",
           "plaidEnv": "sandbox",
-          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg"
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-dev-02f51-deployment",
+          "s3Key": "amplify-builds/syncPlaidAccounts-337459626661357a5378-build.zip"
         },
-        "calculateFinancialSummary": {},
+        "calculateFinancialSummary": {
+          "deploymentBucketName": "amplify-yori-dev-02f51-deployment",
+          "s3Key": "amplify-builds/calculateFinancialSummary-56336e776c6a506f746d-build.zip"
+        },
         "refreshAccountBalances": {
           "plaidClientId": "test",
           "plaidEnv": "sandbox",
-          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg"
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-dev-02f51-deployment",
+          "s3Key": "amplify-builds/refreshAccountBalances-4e7a41476c6862725a6f-build.zip"
+        },
+        "yorihandlers": {
+          "deploymentBucketName": "amplify-yori-dev-02f51-deployment",
+          "s3Key": "amplify-builds/yorihandlers-LambdaLayerVersion05133649-build.zip"
         }
+      },
+      "api": {
+        "yori": {}
       }
     }
   }

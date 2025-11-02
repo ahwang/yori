@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
-//import GoogleSignIn
 import FirebaseCore
 import FirebaseMessaging
 import UserNotifications
 import FirebaseAuth
+import Amplify
+import AWSAPIPlugin
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -73,14 +74,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 @main
 struct yoriApp: App {
 
-//    init() {
-//        // Configure Google Sign-In
-//        if let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
-//           let plist = NSDictionary(contentsOfFile: path),
-//           let clientId = plist["CLIENT_ID"] as? String {
-//            GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientId)
-//        }
-//    }
+    init() {
+        do {
+            try Amplify.add(plugin: AWSAPIPlugin(modelRegistration: AmplifyModels()))
+            try Amplify.configure()
+            print("Initialized Amplify")
+        } catch {
+            print("Could not initialize Amplify: \(error)")
+        }
+    }
     
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
@@ -89,9 +91,6 @@ struct yoriApp: App {
     var body: some Scene {
         WindowGroup {
             AppCoordinator()
-//                .onOpenURL { url in
-//                    GIDSignIn.sharedInstance.handle(url)
-//                }
         }
     }
 }

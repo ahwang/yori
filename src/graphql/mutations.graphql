@@ -1,0 +1,2019 @@
+# this is an auto generated file. This will be overwritten
+
+mutation CreateUserProfileWithFirebase(
+  $firebaseUID: String!
+  $email: String
+  $displayName: String
+) {
+  createUserProfileWithFirebase(
+    firebaseUID: $firebaseUID
+    email: $email
+    displayName: $displayName
+  ) {
+    id
+    firebaseUID
+    email
+    displayName
+    onboardingCompleted
+    hasConnectedAccounts
+    preferredCurrency
+    createdAt
+    updatedAt
+    connectedAccounts {
+      items {
+        id
+        userProfileID
+        accountName
+        accountType
+        balance
+        institution
+        plaidAccountID
+        plaidItemID
+        isActive
+        lastSynced
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    financialSummaries {
+      items {
+        id
+        userProfileID
+        netWorth
+        totalAssets
+        totalLiabilities
+        netWorthChangePercent
+        assetBreakdown
+        calculatedAt
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    plaidTokens {
+      items {
+        id
+        userProfileID
+        itemID
+        accessToken
+        institutionID
+        institutionName
+        isActive
+        lastUsed
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation SyncPlaidAccounts($publicToken: String!, $userProfileID: ID!) {
+  syncPlaidAccounts(publicToken: $publicToken, userProfileID: $userProfileID) {
+    id
+    userProfileID
+    accountName
+    accountType
+    balance
+    institution
+    plaidAccountID
+    plaidItemID
+    isActive
+    lastSynced
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation CalculateFinancialSummary($userProfileID: ID!) {
+  calculateFinancialSummary(userProfileID: $userProfileID) {
+    id
+    userProfileID
+    netWorth
+    totalAssets
+    totalLiabilities
+    netWorthChangePercent
+    assetBreakdown
+    calculatedAt
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation RefreshAccountBalances($userProfileID: ID!) {
+  refreshAccountBalances(userProfileID: $userProfileID) {
+    id
+    userProfileID
+    accountName
+    accountType
+    balance
+    institution
+    plaidAccountID
+    plaidItemID
+    isActive
+    lastSynced
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation CreateUserProfile(
+  $input: CreateUserProfileInput!
+  $condition: ModelUserProfileConditionInput
+) {
+  createUserProfile(input: $input, condition: $condition) {
+    id
+    firebaseUID
+    email
+    displayName
+    onboardingCompleted
+    hasConnectedAccounts
+    preferredCurrency
+    createdAt
+    updatedAt
+    connectedAccounts {
+      items {
+        id
+        userProfileID
+        accountName
+        accountType
+        balance
+        institution
+        plaidAccountID
+        plaidItemID
+        isActive
+        lastSynced
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    financialSummaries {
+      items {
+        id
+        userProfileID
+        netWorth
+        totalAssets
+        totalLiabilities
+        netWorthChangePercent
+        assetBreakdown
+        calculatedAt
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    plaidTokens {
+      items {
+        id
+        userProfileID
+        itemID
+        accessToken
+        institutionID
+        institutionName
+        isActive
+        lastUsed
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation UpdateUserProfile(
+  $input: UpdateUserProfileInput!
+  $condition: ModelUserProfileConditionInput
+) {
+  updateUserProfile(input: $input, condition: $condition) {
+    id
+    firebaseUID
+    email
+    displayName
+    onboardingCompleted
+    hasConnectedAccounts
+    preferredCurrency
+    createdAt
+    updatedAt
+    connectedAccounts {
+      items {
+        id
+        userProfileID
+        accountName
+        accountType
+        balance
+        institution
+        plaidAccountID
+        plaidItemID
+        isActive
+        lastSynced
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    financialSummaries {
+      items {
+        id
+        userProfileID
+        netWorth
+        totalAssets
+        totalLiabilities
+        netWorthChangePercent
+        assetBreakdown
+        calculatedAt
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    plaidTokens {
+      items {
+        id
+        userProfileID
+        itemID
+        accessToken
+        institutionID
+        institutionName
+        isActive
+        lastUsed
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation DeleteUserProfile(
+  $input: DeleteUserProfileInput!
+  $condition: ModelUserProfileConditionInput
+) {
+  deleteUserProfile(input: $input, condition: $condition) {
+    id
+    firebaseUID
+    email
+    displayName
+    onboardingCompleted
+    hasConnectedAccounts
+    preferredCurrency
+    createdAt
+    updatedAt
+    connectedAccounts {
+      items {
+        id
+        userProfileID
+        accountName
+        accountType
+        balance
+        institution
+        plaidAccountID
+        plaidItemID
+        isActive
+        lastSynced
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    financialSummaries {
+      items {
+        id
+        userProfileID
+        netWorth
+        totalAssets
+        totalLiabilities
+        netWorthChangePercent
+        assetBreakdown
+        calculatedAt
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    plaidTokens {
+      items {
+        id
+        userProfileID
+        itemID
+        accessToken
+        institutionID
+        institutionName
+        isActive
+        lastUsed
+        createdAt
+        updatedAt
+        userProfile {
+          id
+          firebaseUID
+          email
+          displayName
+          onboardingCompleted
+          hasConnectedAccounts
+          preferredCurrency
+          createdAt
+          updatedAt
+          connectedAccounts {
+            nextToken
+            __typename
+          }
+          financialSummaries {
+            nextToken
+            __typename
+          }
+          plaidTokens {
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation CreateConnectedAccount(
+  $input: CreateConnectedAccountInput!
+  $condition: ModelConnectedAccountConditionInput
+) {
+  createConnectedAccount(input: $input, condition: $condition) {
+    id
+    userProfileID
+    accountName
+    accountType
+    balance
+    institution
+    plaidAccountID
+    plaidItemID
+    isActive
+    lastSynced
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation UpdateConnectedAccount(
+  $input: UpdateConnectedAccountInput!
+  $condition: ModelConnectedAccountConditionInput
+) {
+  updateConnectedAccount(input: $input, condition: $condition) {
+    id
+    userProfileID
+    accountName
+    accountType
+    balance
+    institution
+    plaidAccountID
+    plaidItemID
+    isActive
+    lastSynced
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation DeleteConnectedAccount(
+  $input: DeleteConnectedAccountInput!
+  $condition: ModelConnectedAccountConditionInput
+) {
+  deleteConnectedAccount(input: $input, condition: $condition) {
+    id
+    userProfileID
+    accountName
+    accountType
+    balance
+    institution
+    plaidAccountID
+    plaidItemID
+    isActive
+    lastSynced
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation CreatePlaidToken(
+  $input: CreatePlaidTokenInput!
+  $condition: ModelPlaidTokenConditionInput
+) {
+  createPlaidToken(input: $input, condition: $condition) {
+    id
+    userProfileID
+    itemID
+    accessToken
+    institutionID
+    institutionName
+    isActive
+    lastUsed
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation UpdatePlaidToken(
+  $input: UpdatePlaidTokenInput!
+  $condition: ModelPlaidTokenConditionInput
+) {
+  updatePlaidToken(input: $input, condition: $condition) {
+    id
+    userProfileID
+    itemID
+    accessToken
+    institutionID
+    institutionName
+    isActive
+    lastUsed
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation DeletePlaidToken(
+  $input: DeletePlaidTokenInput!
+  $condition: ModelPlaidTokenConditionInput
+) {
+  deletePlaidToken(input: $input, condition: $condition) {
+    id
+    userProfileID
+    itemID
+    accessToken
+    institutionID
+    institutionName
+    isActive
+    lastUsed
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation CreateFinancialSummary(
+  $input: CreateFinancialSummaryInput!
+  $condition: ModelFinancialSummaryConditionInput
+) {
+  createFinancialSummary(input: $input, condition: $condition) {
+    id
+    userProfileID
+    netWorth
+    totalAssets
+    totalLiabilities
+    netWorthChangePercent
+    assetBreakdown
+    calculatedAt
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation UpdateFinancialSummary(
+  $input: UpdateFinancialSummaryInput!
+  $condition: ModelFinancialSummaryConditionInput
+) {
+  updateFinancialSummary(input: $input, condition: $condition) {
+    id
+    userProfileID
+    netWorth
+    totalAssets
+    totalLiabilities
+    netWorthChangePercent
+    assetBreakdown
+    calculatedAt
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+mutation DeleteFinancialSummary(
+  $input: DeleteFinancialSummaryInput!
+  $condition: ModelFinancialSummaryConditionInput
+) {
+  deleteFinancialSummary(input: $input, condition: $condition) {
+    id
+    userProfileID
+    netWorth
+    totalAssets
+    totalLiabilities
+    netWorthChangePercent
+    assetBreakdown
+    calculatedAt
+    createdAt
+    updatedAt
+    userProfile {
+      id
+      firebaseUID
+      email
+      displayName
+      onboardingCompleted
+      hasConnectedAccounts
+      preferredCurrency
+      createdAt
+      updatedAt
+      connectedAccounts {
+        items {
+          id
+          userProfileID
+          accountName
+          accountType
+          balance
+          institution
+          plaidAccountID
+          plaidItemID
+          isActive
+          lastSynced
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      financialSummaries {
+        items {
+          id
+          userProfileID
+          netWorth
+          totalAssets
+          totalLiabilities
+          netWorthChangePercent
+          assetBreakdown
+          calculatedAt
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      plaidTokens {
+        items {
+          id
+          userProfileID
+          itemID
+          accessToken
+          institutionID
+          institutionName
+          isActive
+          lastUsed
+          createdAt
+          updatedAt
+          userProfile {
+            id
+            firebaseUID
+            email
+            displayName
+            onboardingCompleted
+            hasConnectedAccounts
+            preferredCurrency
+            createdAt
+            updatedAt
+            __typename
+          }
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}

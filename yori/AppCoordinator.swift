@@ -106,7 +106,6 @@ struct AppCoordinator: View {
             // - has_connected_accounts: boolean
             // - has_completed_profile: boolean
             // - onboarding_step: string
-
             // For now, we'll rely on local UserDefaults
             // In production, this would override local state with backend state
         }

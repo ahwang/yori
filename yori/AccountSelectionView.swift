@@ -198,7 +198,7 @@ struct AccountSelectionRow: View {
 
                 // Account details
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(account.name)
+                    Text(account.accountName)
                         .font(.headline)
                         .foregroundColor(.primary)
 
@@ -215,7 +215,7 @@ struct AccountSelectionRow: View {
                         .font(.headline)
                         .foregroundColor(account.balance >= 0 ? .primary : .red)
 
-                    Text(account.type.capitalized)
+                    Text(account.accountType.rawValue.capitalized)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -237,12 +237,12 @@ struct AccountSelectionRow: View {
     }
 
     private var accountIcon: String {
-        switch account.type.lowercased() {
-        case "checking":
+        switch account.accountType {
+        case .checking:
             return "banknote"
-        case "savings":
+        case .savings:
             return "dollarsign.bank.building"
-        case "credit":
+        case .creditCard:
             return "creditcard"
         default:
             return "building.columns"
@@ -250,12 +250,12 @@ struct AccountSelectionRow: View {
     }
 
     private var accountColor: Color {
-        switch account.type.lowercased() {
-        case "checking":
+        switch account.accountType {
+        case .checking:
             return .blue
-        case "savings":
+        case .savings:
             return .green
-        case "credit":
+        case .creditCard:
             return .orange
         default:
             return .gray
@@ -269,14 +269,14 @@ struct AccountSelectionRow: View {
     }
 }
 
-#Preview {
-    AccountSelectionView(
-        accounts: [
-            ConnectedAccount(id: "1", name: "Chase Checking", type: "checking", balance: 2450.30, institution: "Chase Bank"),
-            ConnectedAccount(id: "2", name: "Chase Savings", type: "savings", balance: 8750.50, institution: "Chase Bank"),
-            ConnectedAccount(id: "3", name: "Chase Freedom Card", type: "credit", balance: -1250.75, institution: "Chase Bank")
-        ],
-        showAccountSelection: .constant(true),
-        showPlaidConnection: .constant(true)
-    )
-}
+//#Preview {
+//    AccountSelectionView(
+//        accounts: [
+//            ConnectedAccount(id: "1", accountName: nil, accountType: "Chase Checking", balance: "checking", institution: 2450.30, plaidAccountID: "Chase Bank", plaidItemID: nil, isActive: true, lastSynced: nil, createdAt: nil, updatedAt: nil),
+//            ConnectedAccount(id: "2", userProfileID: nil, accountName: "Chase Savings", accountType: "savings", balance: 8750.50, institution: "Chase Bank", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: nil, updatedAt: nil),
+//            ConnectedAccount(id: "3", userProfileID: nil, accountName: "Chase Freedom Card", accountType: "credit", balance: -1250.75, institution: "Chase Bank", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: nil, updatedAt: nil)
+//        ],
+//        showAccountSelection: .constant(true),
+//        showPlaidConnection: .constant(true)
+//    )
+//}

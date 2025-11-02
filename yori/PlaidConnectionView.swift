@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Amplify
 
 struct PlaidConnectionView: View {
     @Binding var showPlaidConnection: Bool
@@ -114,53 +115,7 @@ struct PlaidConnectionView: View {
 
         // Simulate Plaid Link flow
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            isLoading = false
-
-            // Simulate successful connection with mock data
-            connectedAccounts = [
-                ConnectedAccount(
-                    id: "acc_1",
-                    userProfileID: nil,
-                    accountName: "Chase Checking",
-                    accountType: "checking",
-                    balance: 2450.30,
-                    institution: "Chase Bank",
-                    plaidAccountID: nil,
-                    isActive: true,
-                    lastSynced: nil,
-                    createdAt: nil,
-                    updatedAt: nil
-                ),
-                ConnectedAccount(
-                    id: "acc_2",
-                    userProfileID: nil,
-                    accountName: "Chase Savings",
-                    accountType: "savings",
-                    balance: 38750.50,
-                    institution: "Chase Bank",
-                    plaidAccountID: nil,
-                    isActive: true,
-                    lastSynced: nil,
-                    createdAt: nil,
-                    updatedAt: nil
-                ),
-                ConnectedAccount(
-                    id: "acc_3",
-                    userProfileID: nil,
-                    accountName: "Chase Freedom Card",
-                    accountType: "credit",
-                    balance: -12500.75,
-                    institution: "Chase Bank",
-                    plaidAccountID: nil,
-                    isActive: true,
-                    lastSynced: nil,
-                    createdAt: nil,
-                    updatedAt: nil
-                )
-            ]
-
-            // Show account selection
-            showAccountSelection = true
+            runPlaidLinkFlow()
         }
 
         // TODO: Implement actual Plaid Link integration
@@ -170,6 +125,53 @@ struct PlaidConnectionView: View {
         // 3. Exchanging public_token for access_token
         // 4. Sending access_token to your backend
         // 5. Fetching account data
+    }
+    
+    private func runPlaidLinkFlow() {
+        isLoading = false
+
+        // Simulate successful connection with mock data
+        connectedAccounts = [
+            ConnectedAccount(
+                id: "acc_1",
+                accountName: "Chase Checking",
+                accountType: .checking,
+                balance: 2450.30,
+                institution: "Chase Bank",
+                plaidAccountID: nil,
+                isActive: true,
+                lastSynced: nil,
+                createdAt: Temporal.DateTime.now(),
+                updatedAt: Temporal.DateTime.now()
+            ),
+            ConnectedAccount(
+                id: "acc_2",
+                accountName: "Chase Savings",
+                accountType: .savings,
+                balance: 38750.50,
+                institution: "Chase Bank",
+                plaidAccountID: nil,
+                isActive: true,
+                lastSynced: nil,
+                createdAt: Temporal.DateTime.now(),
+                updatedAt: Temporal.DateTime.now()
+            ),
+            ConnectedAccount(
+                id: "acc_3",
+                accountName: "Chase Freedom Card",
+                accountType: .creditCard,
+                balance: -12500.75,
+                institution: "Chase Bank",
+                plaidAccountID: nil,
+                isActive: true,
+                lastSynced: nil,
+                createdAt: Temporal.DateTime.now(),
+                updatedAt: Temporal.DateTime.now()
+            )
+        ]
+
+        // Show account selection
+        showAccountSelection = true
     }
 
     private func sendTokenToBackend(_ publicToken: String) {

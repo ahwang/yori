@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Amplify
 
 struct DashboardView: View {
     @State private var showingSignOut = false
@@ -36,7 +37,7 @@ struct DashboardView: View {
                             NetWorthCard(
                                 netWorth: summary.netWorth,
                                 changePercent: summary.netWorthChangePercent ?? 0.0,
-                                lastUpdated: summary.calculatedAt ?? Date()
+                                lastUpdated: summary.calculatedAt.foundationDate
                             )
                             
                             // Assets & Liabilities Summary
@@ -46,7 +47,7 @@ struct DashboardView: View {
                             )
                             
                             // Asset Breakdown
-                            AssetBreakdownCard(assetCategories: summary.assetBreakdown)
+                            AssetBreakdownCard(assetCategories: parseAssetBreakdown(from: summary.assetBreakdown))
                             
                             // Quick Actions
                             QuickActionsCard()
@@ -146,28 +147,28 @@ struct DashboardView: View {
     private func loadMockData() {
         // Fallback mock data for development
         let mockAccounts = [
-            ConnectedAccount(id: "1", userProfileID: nil, accountName: "Chase Checking", accountType: "checking", balance: 2450.30, institution: "Chase Bank", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: nil, updatedAt: nil),
-            ConnectedAccount(id: "2", userProfileID: nil, accountName: "Wells Fargo Savings", accountType: "savings", balance: 38750.50, institution: "Wells Fargo", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: nil, updatedAt: nil),
-            ConnectedAccount(id: "3", userProfileID: nil, accountName: "Capital One Venture", accountType: "credit", balance: -12500.75, institution: "Capital One", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: nil, updatedAt: nil),
-            ConnectedAccount(id: "4", userProfileID: nil, accountName: "Fidelity 401(k)", accountType: "retirement", balance: 450000.00, institution: "Fidelity", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: nil, updatedAt: nil),
-            ConnectedAccount(id: "5", userProfileID: nil, accountName: "E*TRADE Brokerage", accountType: "investment", balance: 1250000.00, institution: "E*TRADE", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: nil, updatedAt: nil)
+            ConnectedAccount(id: "1", accountName: "Chase Checking", accountType: .checking, balance: 2450.30, institution: "Chase Bank", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: Temporal.DateTime.now(), updatedAt: Temporal.DateTime.now()),
+            ConnectedAccount(id: "2", accountName: "Wells Fargo Savings", accountType: .savings, balance: 38750.50, institution: "Wells Fargo", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: Temporal.DateTime.now(), updatedAt: Temporal.DateTime.now()),
+            ConnectedAccount(id: "3", accountName: "Capital One Venture", accountType: .creditCard, balance: -12500.75, institution: "Capital One", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: Temporal.DateTime.now(), updatedAt: Temporal.DateTime.now()),
+            ConnectedAccount(id: "4", accountName: "Fidelity 401(k)", accountType: .retirement, balance: 450000.00, institution: "Fidelity", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: Temporal.DateTime.now(), updatedAt: Temporal.DateTime.now()),
+            ConnectedAccount(id: "5", accountName: "E*TRADE Brokerage", accountType: .investment, balance: 1250000.00, institution: "E*TRADE", plaidAccountID: nil, isActive: true, lastSynced: nil, createdAt: Temporal.DateTime.now(), updatedAt: Temporal.DateTime.now())
         ]
 
         // Calculate asset breakdown
-        let assetBreakdown = calculateAssetBreakdown(from: mockAccounts)
+        let assetBreakdown = encodeAssetBreakdown(calculateAssetBreakdown(from: mockAccounts))
         let totalAssets = mockAccounts.filter { $0.isAsset }.reduce(0) { $0 + $1.balance }
         let totalLiabilities = abs(mockAccounts.filter { $0.isLiability }.reduce(0) { $0 + $1.balance })
 
         financialSummary = FinancialSummary(
-            id: nil,
+            id: "test",
             netWorth: totalAssets - totalLiabilities,
             totalAssets: totalAssets,
             totalLiabilities: totalLiabilities,
             netWorthChangePercent: 2.3,
             assetBreakdown: assetBreakdown,
-            calculatedAt: Date(),
-            createdAt: nil,
-            updatedAt: nil
+            calculatedAt: Temporal.DateTime.now(),
+            createdAt: Temporal.DateTime.now(),
+            updatedAt: Temporal.DateTime.now()
         )
     }
 
@@ -189,6 +190,34 @@ struct DashboardView: View {
                 color: type.colorName
             )
         }.sorted { $0.amount > $1.amount }
+    }
+
+    private func parseAssetBreakdown(from jsonString: String?) -> [AssetCategory] {
+        guard let jsonString = jsonString,
+              !jsonString.isEmpty,
+              let data = jsonString.data(using: .utf8) else {
+            return []
+        }
+
+        do {
+            let categories = try JSONDecoder().decode([AssetCategory].self, from: data)
+            return categories
+        } catch {
+            print("Error parsing asset breakdown JSON: \(error)")
+            return []
+        }
+    }
+
+    private func encodeAssetBreakdown(_ categories: [AssetCategory]) -> String? {
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let data = try encoder.encode(categories)
+            return String(data: data, encoding: .utf8)
+        } catch {
+            print("Error encoding asset breakdown to JSON: \(error)")
+            return nil
+        }
     }
 
     private func signOut() {

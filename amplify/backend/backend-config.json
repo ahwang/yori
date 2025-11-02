@@ -134,6 +134,30 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_calculateFinancialSummary_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "calculateFinancialSummary"
+        }
+      ]
+    },
+    "AMPLIFY_function_calculateFinancialSummary_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "calculateFinancialSummary"
+        }
+      ]
+    },
+    "AMPLIFY_function_createUserProfileWithFirebase_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
     "AMPLIFY_function_createUserProfileWithFirebase_firebaseClientEmail": {
       "usedBy": [
         {
@@ -166,11 +190,27 @@
         }
       ]
     },
+    "AMPLIFY_function_createUserProfileWithFirebase_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
     "AMPLIFY_function_createUserProfileWithFirebase_secretsPathAmplifyAppId": {
       "usedBy": [
         {
           "category": "function",
           "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserProfileByFirebaseUID_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserProfileByFirebaseUID"
         }
       ]
     },
@@ -190,11 +230,27 @@
         }
       ]
     },
+    "AMPLIFY_function_getUserProfileByFirebaseUID_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserProfileByFirebaseUID"
+        }
+      ]
+    },
     "AMPLIFY_function_getUserProfileByFirebaseUID_secretsPathAmplifyAppId": {
       "usedBy": [
         {
           "category": "function",
           "resourceName": "getUserProfileByFirebaseUID"
+        }
+      ]
+    },
+    "AMPLIFY_function_refreshAccountBalances_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "refreshAccountBalances"
         }
       ]
     },
@@ -214,11 +270,27 @@
         }
       ]
     },
+    "AMPLIFY_function_refreshAccountBalances_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "refreshAccountBalances"
+        }
+      ]
+    },
     "AMPLIFY_function_refreshAccountBalances_secretsPathAmplifyAppId": {
       "usedBy": [
         {
           "category": "function",
           "resourceName": "refreshAccountBalances"
+        }
+      ]
+    },
+    "AMPLIFY_function_syncPlaidAccounts_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "syncPlaidAccounts"
         }
       ]
     },
@@ -238,11 +310,35 @@
         }
       ]
     },
+    "AMPLIFY_function_syncPlaidAccounts_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "syncPlaidAccounts"
+        }
+      ]
+    },
     "AMPLIFY_function_syncPlaidAccounts_secretsPathAmplifyAppId": {
       "usedBy": [
         {
           "category": "function",
           "resourceName": "syncPlaidAccounts"
+        }
+      ]
+    },
+    "AMPLIFY_function_yorihandlers_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ]
+    },
+    "AMPLIFY_function_yorihandlers_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "yorihandlers"
         }
       ]
     }
