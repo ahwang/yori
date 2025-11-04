@@ -1,16 +1,27 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const { SSMClient, GetParametersCommand } = require('@aws-sdk/client-ssm');
+
+const client = new SSMClient();
+const { Parameters } = await client.send(new GetParametersCommand({
+  Names: ["FIREBASE_PRIVATE_KEY","PLAID_SECRET"].map(secretName => process.env[secretName]),
+  WithDecryption: true,
+}));
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
 const { SSMClient, GetParametersCommand } = require('@aws-sdk/client-ssm');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { DynamoDBDocumentClient, PutCommand, GetCommand } = require('@aws-sdk/lib-dynamodb');
 const admin = require('firebase-admin');
 
 /* Amplify Params - DO NOT EDIT
+	API_YORI_GRAPHQLAPIIDOUTPUT
+	API_YORI_USERPROFILETABLE_ARN
+	API_YORI_USERPROFILETABLE_NAME
 	ENV
 	REGION
-	FIREBASE_PROJECT_ID
-	FIREBASE_CLIENT_EMAIL
-	PLAID_CLIENT_ID
-	PLAID_ENV
-	API_YORI_USERPROFILETABLE_NAME
 Amplify Params - DO NOT EDIT */
 
 // Initialize DynamoDB client

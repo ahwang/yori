@@ -1,3 +1,16 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const { SSMClient, GetParametersCommand } = require('@aws-sdk/client-ssm');
+
+const client = new SSMClient();
+const { Parameters } = await client.send(new GetParametersCommand({
+  Names: ["PLAID_SECRET"].map(secretName => process.env[secretName]),
+  WithDecryption: true,
+}));
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
 const { SSMClient, GetParametersCommand } = require('@aws-sdk/client-ssm');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { DynamoDBDocumentClient, QueryCommand, UpdateCommand } = require('@aws-sdk/lib-dynamodb');

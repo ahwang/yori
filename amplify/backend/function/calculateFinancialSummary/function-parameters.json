@@ -25,9 +25,9 @@
     {
       "type": "ProjectLayer",
       "resourceName": "yorihandlers",
-      "env": "dev",
       "version": "Always choose latest version",
-      "isLatestVersionSelected": true
+      "isLatestVersionSelected": true,
+      "env": "yori"
     }
   ]
 }

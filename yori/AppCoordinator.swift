@@ -90,24 +90,31 @@ struct AppCoordinator: View {
     }
 
     private func checkUserProfileFromBackend() {
-        guard let user = Auth.auth().currentUser else { return }
+        guard Auth.auth().currentUser != nil else { return }
 
-        user.getIDToken { idToken, error in
-            guard let idToken = idToken, error == nil else {
-                print("Failed to get ID token")
-                return
+        Task {
+            do {
+                let userProfile = try await AmplifyAPIService.shared.getCurrentUserProfile()
+
+                // Update local state to match backend state
+                await MainActor.run {
+                    // If backend says onboarding is completed, update local state
+                    if userProfile.onboardingCompleted {
+                        UserDefaults.standard.set(true, forKey: "onboarding_completed")
+                        isOnboardingCompleted = true
+                    } else {
+                        // Backend says onboarding is not complete, ensure local state matches
+                        UserDefaults.standard.set(false, forKey: "onboarding_completed")
+                        isOnboardingCompleted = false
+                    }
+                }
+
+                print("✅ User profile synced from backend: onboarding=\(userProfile.onboardingCompleted), hasAccounts=\(userProfile.hasConnectedAccounts)")
+            } catch {
+                print("⚠️ Failed to fetch user profile from backend: \(error.localizedDescription)")
+                // On error, fall back to local UserDefaults
+                // This ensures the app can still work offline or if backend is unavailable
             }
-
-            // TODO: Make API call to check user profile
-            // GET /api/user/profile
-            // Headers: Authorization: Bearer {idToken}
-            //
-            // Response should indicate:
-            // - has_connected_accounts: boolean
-            // - has_completed_profile: boolean
-            // - onboarding_step: string
-            // For now, we'll rely on local UserDefaults
-            // In production, this would override local state with backend state
         }
     }
 }

@@ -50,7 +50,67 @@
         "yorihandlers": {
           "deploymentBucketName": "amplify-yori-dev-02f51-deployment",
           "s3Key": "amplify-builds/yorihandlers-LambdaLayerVersion05133649-build.zip"
-        }
+        },
+        "yori": {}
+      },
+      "api": {
+        "yori": {}
+      }
+    }
+  },
+  "yori": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yori-yori-35611-authRole",
+      "UnauthRoleArn": "arn:aws:iam::386851205608:role/amplify-yori-yori-35611-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::386851205608:role/amplify-yori-yori-35611-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-yori-yori-35611-deployment",
+      "UnauthRoleName": "amplify-yori-yori-35611-unauthRole",
+      "StackName": "amplify-yori-yori-35611",
+      "StackId": "arn:aws:cloudformation:us-east-1:386851205608:stack/amplify-yori-yori-35611/5971b770-b84e-11f0-8e4d-12b6201f5dcf",
+      "AmplifyAppId": "d1pjn1fl1s5pxg"
+    },
+    "categories": {
+      "function": {
+        "calculateFinancialSummary": {
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/calculateFinancialSummary-56336e776c6a506f746d-build.zip"
+        },
+        "createUserProfileWithFirebase": {
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/createUserProfileWithFirebase-5756316a2b354c2b7a49-build.zip",
+          "firebaseProjectId": "yori-d294c",
+          "firebaseClientEmail": "firebase-adminsdk-fbsvc@yori-d294c.iam.gserviceaccount.com",
+          "plaidClientId": "test",
+          "plaidEnv": "sandbox"
+        },
+        "getUserProfileByFirebaseUID": {
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/getUserProfileByFirebaseUID-32463938493050444768-build.zip",
+          "firebaseProjectId": "yori-d294c",
+          "firebaseClientEmail": "firebase-adminsdk-fbsvc@yori-d294c.iam.gserviceaccount.com"
+        },
+        "refreshAccountBalances": {
+          "plaidClientId": "test",
+          "plaidEnv": "sandbox",
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/refreshAccountBalances-5a45344e72576a693373-build.zip"
+        },
+        "syncPlaidAccounts": {
+          "plaidClientId": "test",
+          "plaidEnv": "sandbox",
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/syncPlaidAccounts-7a756277322f6b745248-build.zip"
+        },
+        "yorihandlers": {
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/yorihandlers-LambdaLayerVersion79061f7b-build.zip"
+        },
+        "yori": {}
       },
       "api": {
         "yori": {}

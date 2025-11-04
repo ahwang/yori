@@ -106,23 +106,23 @@ type Mutation {
     firebaseUID: String!
     email: String
     displayName: String
-  ): UserProfile @function(name: "createUserProfileWithFirebase")
+  ): UserProfile @function(name: "createUserProfileWithFirebase-${env}")
 
   # Sync Plaid accounts after Link flow
   syncPlaidAccounts(
     publicToken: String!
     userProfileID: ID!
-  ): [ConnectedAccount] @function(name: "syncPlaidAccounts")
+  ): [ConnectedAccount] @function(name: "syncPlaidAccounts-${env}")
 
   # Calculate comprehensive financial summary
   calculateFinancialSummary(
     userProfileID: ID!
-  ): FinancialSummary @function(name: "calculateFinancialSummary")
+  ): FinancialSummary @function(name: "calculateFinancialSummary-${env}")
 
   # Refresh account balances via Plaid
   refreshAccountBalances(
     userProfileID: ID!
-  ): [ConnectedAccount] @function(name: "refreshAccountBalances")
+  ): [ConnectedAccount] @function(name: "refreshAccountBalances-${env}")
 }
 
 # Custom Queries for optimized data fetching
@@ -130,15 +130,15 @@ type Query {
   # Get user profile by Firebase UID
   getUserProfileByFirebaseUID(
     firebaseUID: String!
-  ): UserProfile @function(name: "getUserProfileByFirebaseUID")
+  ): UserProfile @function(name: "getUserProfileByFirebaseUID-${env}")
 
   # Get latest financial summary for user
   getFinancialSummaryForUser(
     userProfileID: ID!
-  ): FinancialSummary @function(name: "getFinancialSummaryForUser")
+  ): FinancialSummary @function(name: "getFinancialSummaryForUser-${env}")
 
   # Get active connected accounts for user
   getActiveConnectedAccounts(
     userProfileID: ID!
-  ): [ConnectedAccount] @function(name: "getActiveConnectedAccounts")
+  ): [ConnectedAccount] @function(name: "getActiveConnectedAccounts-${env}")
 }

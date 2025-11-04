@@ -18,7 +18,7 @@ class AmplifyAPIService {
 
     func getCurrentUserProfile() async throws -> UserProfile {
         guard let user = Auth.auth().currentUser else {
-            throw APIError.notAuthenticated
+            throw APIError.httpStatusError(401, HTTPURLResponse.init())
         }
 
         // First try to get existing profile by Firebase UID
@@ -44,20 +44,19 @@ class AmplifyAPIService {
     }
 
     func createUserProfile(firebaseUID: String, email: String?, displayName: String?) async throws -> UserProfile {
-        let userProfile = UserProfile(
-            firebaseUID: firebaseUID,
-            email: email,
-            displayName: displayName,
-            onboardingCompleted: false,
-            hasConnectedAccounts: false,
-            preferredCurrency: "USD",
-            createdAt: Temporal.DateTime.now(),
-            updatedAt: Temporal.DateTime.now()
-        )
+        var variables: [String: Any] = ["firebaseUID": firebaseUID]
+
+        if let email = email {
+            variables["email"] = email
+        }
+
+        if let displayName = displayName {
+            variables["displayName"] = displayName
+        }
 
         let request = GraphQLRequest<UserProfile>(
             document: createUserProfileMutation,
-//            variables: userProfile.graphQLVariables,
+            variables: variables,
             responseType: UserProfile.self
         )
 
@@ -72,9 +71,28 @@ class AmplifyAPIService {
     }
 
     func updateUserProfile(_ userProfile: UserProfile) async throws -> UserProfile {
+        var input: [String: Any] = [
+            "id": userProfile.id,
+            "firebaseUID": userProfile.firebaseUID,
+            "onboardingCompleted": userProfile.onboardingCompleted,
+            "hasConnectedAccounts": userProfile.hasConnectedAccounts
+        ]
+
+        if let email = userProfile.email {
+            input["email"] = email
+        }
+
+        if let displayName = userProfile.displayName {
+            input["displayName"] = displayName
+        }
+
+        if let preferredCurrency = userProfile.preferredCurrency {
+            input["preferredCurrency"] = preferredCurrency
+        }
+
         let request = GraphQLRequest<UserProfile>(
             document: updateUserProfileMutation,
-//            variables: userProfile.graphQLVariables,
+            variables: ["input": input],
             responseType: UserProfile.self
         )
 
@@ -139,7 +157,7 @@ class AmplifyAPIService {
     func disconnectAccount(_ accountId: String) async throws {
         let request = GraphQLRequest<ConnectedAccount?>(
             document: deleteConnectedAccountMutation,
-            variables: ["id": accountId],
+            variables: ["input": ["id": accountId]],
             responseType: ConnectedAccount?.self
         )
 
@@ -219,8 +237,8 @@ query GetUserProfileByFirebaseUID($firebaseUID: String!) {
 """
 
 private let createUserProfileMutation = """
-mutation CreateUserProfile($input: CreateUserProfileInput!) {
-  createUserProfile(input: $input) {
+mutation CreateUserProfileWithFirebase($firebaseUID: String!, $email: String, $displayName: String) {
+  createUserProfileWithFirebase(firebaseUID: $firebaseUID, email: $email, displayName: $displayName) {
     id
     firebaseUID
     email
