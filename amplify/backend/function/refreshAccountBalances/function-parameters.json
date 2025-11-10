@@ -52,12 +52,12 @@
   ],
   "environmentVariableList": [
     {
-      "cloudFormationParameterName": "plaidClientId",
-      "environmentVariableName": "PLAID_CLIENT_ID"
-    },
-    {
       "cloudFormationParameterName": "plaidEnv",
       "environmentVariableName": "PLAID_ENV"
+    },
+    {
+      "cloudFormationParameterName": "plaidClientId",
+      "environmentVariableName": "PLAID_CLIENT_ID"
     }
   ],
   "secretNames": [

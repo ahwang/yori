@@ -26,8 +26,8 @@ enum AssetType: String, CaseIterable {
     case investments = "Investments"
     case realEstate = "Real Estate"
     case retirement = "Retirement"
-    case crypto = "Cryptocurrency"
-    case liabilities = "Liabilities"
+    case loans = "Loans"
+    case creditcards = "Credit Cards"
     case other = "Other Assets"
 
     var icon: String {
@@ -40,9 +40,9 @@ enum AssetType: String, CaseIterable {
             return "house"
         case .retirement:
             return "calendar.badge.clock"
-        case .crypto:
-            return "bitcoinsign.circle"
-        case .liabilities:
+        case .loans:
+            return "bag.circle.fill"
+        case .creditcards:
             return "creditcard"
         case .other:
             return "folder"
@@ -59,9 +59,9 @@ enum AssetType: String, CaseIterable {
             return "orange"
         case .retirement:
             return "purple"
-        case .crypto:
+        case .loans:
             return "yellow"
-        case .liabilities:
+        case .creditcards:
             return "red"
         case .other:
             return "gray"
@@ -79,7 +79,7 @@ extension ConnectedAccount {
         case .retirement:
             return .retirement
         case .creditCard, .loan, .mortgage:
-            return .liabilities
+            return .creditcards
         default:
             return .other
         }

@@ -17,6 +17,7 @@
 		8117F5222EB6A87100481BC8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8117F5212EB6A87100481BC8 /* FirebaseMessaging */; };
 		814C75C72EB7DD4A00F8FDF9 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 814C75C62EB7DD4A00F8FDF9 /* Amplify */; };
 		814C76082EB7E7B800F8FDF9 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 814C76072EB7E7B800F8FDF9 /* AWSAPIPlugin */; };
+		81AF5E682EBEA54E00532061 /* LinkKit in Frameworks */ = {isa = PBXBuildFile; productRef = 81AF5E672EBEA54E00532061 /* LinkKit */; };
 		81F25AC02EB69A18006BCAD2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25ABF2EB69A18006BCAD2 /* FirebaseAuth */; };
 		81F25AC22EB69A18006BCAD2 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25AC12EB69A18006BCAD2 /* FirebaseCore */; };
 		81F25AC52EB69C96006BCAD2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 81F25AC42EB69C96006BCAD2 /* GoogleSignIn */; };
@@ -75,6 +76,7 @@
 				814C76082EB7E7B800F8FDF9 /* AWSAPIPlugin in Frameworks */,
 				8117F5222EB6A87100481BC8 /* FirebaseMessaging in Frameworks */,
 				814C75C72EB7DD4A00F8FDF9 /* Amplify in Frameworks */,
+				81AF5E682EBEA54E00532061 /* LinkKit in Frameworks */,
 				81F25AC52EB69C96006BCAD2 /* GoogleSignIn in Frameworks */,
 				81F25AC72EB69C96006BCAD2 /* GoogleSignInSwift in Frameworks */,
 			);
@@ -162,6 +164,7 @@
 				8117F5212EB6A87100481BC8 /* FirebaseMessaging */,
 				814C75C62EB7DD4A00F8FDF9 /* Amplify */,
 				814C76072EB7E7B800F8FDF9 /* AWSAPIPlugin */,
+				81AF5E672EBEA54E00532061 /* LinkKit */,
 			);
 			productName = yori;
 			productReference = 811400612EB679BA00DB6C8C /* yori.app */;
@@ -195,6 +198,7 @@
 				81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				81F25AC32EB69C96006BCAD2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				814C75C52EB7DD4A00F8FDF9 /* XCRemoteSwiftPackageReference "amplify-swift" */,
+				81AF5E662EBEA54E00532061 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 811400622EB679BA00DB6C8C /* Products */;
@@ -470,6 +474,14 @@
 				minimumVersion = 2.51.4;
 			};
 		};
+		81AF5E662EBEA54E00532061 /* XCRemoteSwiftPackageReference "plaid-link-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/plaid/plaid-link-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.4.2;
+			};
+		};
 		81F25ABE2EB69A17006BCAD2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -503,6 +515,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 814C75C52EB7DD4A00F8FDF9 /* XCRemoteSwiftPackageReference "amplify-swift" */;
 			productName = AWSAPIPlugin;
+		};
+		81AF5E672EBEA54E00532061 /* LinkKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81AF5E662EBEA54E00532061 /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
+			productName = LinkKit;
 		};
 		81F25ABF2EB69A18006BCAD2 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

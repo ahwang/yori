@@ -79,7 +79,7 @@
         "createUserProfileWithFirebase": {
           "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
           "deploymentBucketName": "amplify-yori-yori-35611-deployment",
-          "s3Key": "amplify-builds/createUserProfileWithFirebase-5756316a2b354c2b7a49-build.zip",
+          "s3Key": "amplify-builds/createUserProfileWithFirebase-72324f5a746432425339-build.zip",
           "firebaseProjectId": "yori-d294c",
           "firebaseClientEmail": "firebase-adminsdk-fbsvc@yori-d294c.iam.gserviceaccount.com",
           "plaidClientId": "test",
@@ -88,29 +88,44 @@
         "getUserProfileByFirebaseUID": {
           "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
           "deploymentBucketName": "amplify-yori-yori-35611-deployment",
-          "s3Key": "amplify-builds/getUserProfileByFirebaseUID-32463938493050444768-build.zip",
+          "s3Key": "amplify-builds/getUserProfileByFirebaseUID-7a486f584b5372453441-build.zip",
           "firebaseProjectId": "yori-d294c",
           "firebaseClientEmail": "firebase-adminsdk-fbsvc@yori-d294c.iam.gserviceaccount.com"
         },
         "refreshAccountBalances": {
-          "plaidClientId": "test",
-          "plaidEnv": "sandbox",
           "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
           "deploymentBucketName": "amplify-yori-yori-35611-deployment",
-          "s3Key": "amplify-builds/refreshAccountBalances-5a45344e72576a693373-build.zip"
+          "s3Key": "amplify-builds/refreshAccountBalances-5a45344e72576a693373-build.zip",
+          "plaidEnv": "sandbox",
+          "plaidClientId": "690282448452e70020cf0ba8"
         },
         "syncPlaidAccounts": {
-          "plaidClientId": "test",
-          "plaidEnv": "sandbox",
           "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
           "deploymentBucketName": "amplify-yori-yori-35611-deployment",
-          "s3Key": "amplify-builds/syncPlaidAccounts-7a756277322f6b745248-build.zip"
+          "s3Key": "amplify-builds/syncPlaidAccounts-7a756277322f6b745248-build.zip",
+          "plaidClientId": "690282448452e70020cf0ba8",
+          "plaidEnv": "sandbox"
         },
         "yorihandlers": {
           "deploymentBucketName": "amplify-yori-yori-35611-deployment",
           "s3Key": "amplify-builds/yorihandlers-LambdaLayerVersion79061f7b-build.zip"
         },
-        "yori": {}
+        "yori": {},
+        "getFinancialSummaryForUser": {
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/getFinancialSummaryForUser-41556f32576968797573-build.zip"
+        },
+        "getActiveConnectedAccounts": {
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/getActiveConnectedAccounts-35724e4e4c626c416f30-build.zip"
+        },
+        "createPlaidLinkToken": {
+          "plaidClientId": "690282448452e70020cf0ba8",
+          "plaidEnv": "sandbox",
+          "secretsPathAmplifyAppId": "d1pjn1fl1s5pxg",
+          "deploymentBucketName": "amplify-yori-yori-35611-deployment",
+          "s3Key": "amplify-builds/createPlaidLinkToken-526a624447692b424659-build.zip"
+        }
       },
       "api": {
         "yori": {}

@@ -42,11 +42,18 @@ async function initializeFirebase() {
       WithDecryption: true,
     }));
 
-    const privateKey = Parameters.find(p => p.Name === process.env.FIREBASE_PRIVATE_KEY)?.Value;
+    let privateKey = Parameters.find(p => p.Name === process.env.FIREBASE_PRIVATE_KEY)?.Value;
 
     if (!privateKey) {
       throw new Error('Firebase private key not found in secrets');
     }
+
+    privateKey = privateKey.trim();
+    if ( (privateKey.startsWith('"') && (privateKey.endsWith('"'))) || (privateKey.startsWith("'") && (privateKey.endsWith("'"))) ) {
+      privateKey = privateKey.slice(1, -1);
+    } 
+    privateKey = privateKey.replace(/\\n/g, '\n');
+    privateKey = privateKey.trim();
 
     // Initialize Firebase Admin SDK
     admin.initializeApp({

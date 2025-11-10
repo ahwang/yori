@@ -4,27 +4,27 @@ import Foundation
 
 public struct UserProfile: Model {
   public let id: String
-  public var firebaseUID: String
+  public var firebaseUID: String?
   public var email: String?
   public var displayName: String?
-  public var onboardingCompleted: Bool
-  public var hasConnectedAccounts: Bool
+  public var onboardingCompleted: Bool?
+  public var hasConnectedAccounts: Bool?
   public var preferredCurrency: String?
-  public var createdAt: Temporal.DateTime
-  public var updatedAt: Temporal.DateTime
+  public var createdAt: Temporal.DateTime?
+  public var updatedAt: Temporal.DateTime?
   public var connectedAccounts: List<ConnectedAccount>?
   public var financialSummaries: List<FinancialSummary>?
   public var plaidTokens: List<PlaidToken>?
   
   public init(id: String = UUID().uuidString,
-      firebaseUID: String,
+      firebaseUID: String? = nil,
       email: String? = nil,
       displayName: String? = nil,
-      onboardingCompleted: Bool,
-      hasConnectedAccounts: Bool,
+      onboardingCompleted: Bool? = nil,
+      hasConnectedAccounts: Bool? = nil,
       preferredCurrency: String? = nil,
-      createdAt: Temporal.DateTime,
-      updatedAt: Temporal.DateTime,
+      createdAt: Temporal.DateTime? = nil,
+      updatedAt: Temporal.DateTime? = nil,
       connectedAccounts: List<ConnectedAccount>? = [],
       financialSummaries: List<FinancialSummary>? = [],
       plaidTokens: List<PlaidToken>? = []) {

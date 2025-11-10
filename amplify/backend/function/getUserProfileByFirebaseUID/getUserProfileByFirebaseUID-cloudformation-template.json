@@ -317,7 +317,7 @@
                 "dynamodb:DeleteItem"
               ],
               "Resource": [
-                "arn:aws:dynamodb:us-east-1:386851205608:table/UserProfile-rlogrq7hebghdarstppuvmxrrq-yori"
+                "arn:aws:dynamodb:us-east-1:386851205608:table/*"
               ],
               "Effect": "Allow"
             }

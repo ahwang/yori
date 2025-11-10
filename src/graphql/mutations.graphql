@@ -148,6 +148,14 @@ mutation CreateUserProfileWithFirebase(
   }
 }
 
+mutation CreatePlaidLinkToken($userProfileID: ID!) {
+  createPlaidLinkToken(userProfileID: $userProfileID) {
+    linkToken
+    expiration
+    __typename
+  }
+}
+
 mutation SyncPlaidAccounts($publicToken: String!, $userProfileID: ID!) {
   syncPlaidAccounts(publicToken: $publicToken, userProfileID: $userProfileID) {
     id

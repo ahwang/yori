@@ -16,12 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "plaidClientId": {
-      "Type": "String"
-    },
-    "plaidEnv": {
-      "Type": "String"
-    },
     "apiyoriGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apiyoriGraphQLAPIIdOutput"
@@ -39,6 +33,12 @@
       "Default": "functionyorihandlersArn"
     },
     "secretsPathAmplifyAppId": {
+      "Type": "String"
+    },
+    "plaidClientId": {
+      "Type": "String"
+    },
+    "plaidEnv": {
       "Type": "String"
     }
   },
@@ -208,12 +208,6 @@
                 ]
               ]
             },
-            "PLAID_CLIENT_ID": {
-              "Ref": "plaidClientId"
-            },
-            "PLAID_ENV": {
-              "Ref": "plaidEnv"
-            },
             "PLAID_SECRET": {
               "Fn::Join": [
                 "",
@@ -235,6 +229,12 @@
                   "PLAID_SECRET"
                 ]
               ]
+            },
+            "PLAID_CLIENT_ID": {
+              "Ref": "plaidClientId"
+            },
+            "PLAID_ENV": {
+              "Ref": "plaidEnv"
             }
           }
         },

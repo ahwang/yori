@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import Amplify
+import LinkKit
 
 struct PlaidConnectionView: View {
     @Binding var showPlaidConnection: Bool
@@ -16,6 +17,7 @@ struct PlaidConnectionView: View {
     @State private var alertMessage = ""
     @State private var connectedAccounts: [ConnectedAccount] = []
     @State private var showAccountSelection = false
+    @State private var showPlaidLink = false
 
     var body: some View {
         VStack(spacing: 30) {
@@ -108,70 +110,27 @@ struct PlaidConnectionView: View {
                 showPlaidConnection: $showPlaidConnection
             )
         }
+        .background(
+            PlaidLinkViewController(
+                isPresented: $showPlaidLink,
+                onSuccess: { publicToken in
+                    isLoading = false
+                    sendTokenToBackend(publicToken)
+                },
+                onExit: { error in
+                    isLoading = false
+                    if let error = error {
+                        alertMessage = error.localizedDescription
+                        showAlert = true
+                    }
+                }
+            )
+        )
     }
 
     private func connectWithPlaid() {
         isLoading = true
-
-        // Simulate Plaid Link flow
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            runPlaidLinkFlow()
-        }
-
-        // TODO: Implement actual Plaid Link integration
-        // This would involve:
-        // 1. Getting link_token from your backend
-        // 2. Presenting Plaid Link UI
-        // 3. Exchanging public_token for access_token
-        // 4. Sending access_token to your backend
-        // 5. Fetching account data
-    }
-    
-    private func runPlaidLinkFlow() {
-        isLoading = false
-
-        // Simulate successful connection with mock data
-        connectedAccounts = [
-            ConnectedAccount(
-                id: "acc_1",
-                accountName: "Chase Checking",
-                accountType: .checking,
-                balance: 2450.30,
-                institution: "Chase Bank",
-                plaidAccountID: nil,
-                isActive: true,
-                lastSynced: nil,
-                createdAt: Temporal.DateTime.now(),
-                updatedAt: Temporal.DateTime.now()
-            ),
-            ConnectedAccount(
-                id: "acc_2",
-                accountName: "Chase Savings",
-                accountType: .savings,
-                balance: 38750.50,
-                institution: "Chase Bank",
-                plaidAccountID: nil,
-                isActive: true,
-                lastSynced: nil,
-                createdAt: Temporal.DateTime.now(),
-                updatedAt: Temporal.DateTime.now()
-            ),
-            ConnectedAccount(
-                id: "acc_3",
-                accountName: "Chase Freedom Card",
-                accountType: .creditCard,
-                balance: -12500.75,
-                institution: "Chase Bank",
-                plaidAccountID: nil,
-                isActive: true,
-                lastSynced: nil,
-                createdAt: Temporal.DateTime.now(),
-                updatedAt: Temporal.DateTime.now()
-            )
-        ]
-
-        // Show account selection
-        showAccountSelection = true
+        showPlaidLink = true
     }
 
     private func sendTokenToBackend(_ publicToken: String) {
@@ -213,6 +172,57 @@ struct BenefitRow: View {
     }
 }
 
+
+// MARK: - Plaid Link UIViewController Wrapper
+
+struct PlaidLinkViewController: UIViewControllerRepresentable {
+    @Binding var isPresented: Bool
+    let onSuccess: (String) -> Void
+    let onExit: (Error?) -> Void
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        return UIViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        if isPresented && context.coordinator.handler == nil {
+            context.coordinator.presentPlaidLink(from: uiViewController)
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(isPresented: $isPresented, onSuccess: onSuccess, onExit: onExit)
+    }
+
+    class Coordinator {
+        @Binding var isPresented: Bool
+        let onSuccess: (String) -> Void
+        let onExit: (Error?) -> Void
+        var handler: Handler?
+
+        init(isPresented: Binding<Bool>, onSuccess: @escaping (String) -> Void, onExit: @escaping (Error?) -> Void) {
+            self._isPresented = isPresented
+            self.onSuccess = onSuccess
+            self.onExit = onExit
+        }
+
+        func presentPlaidLink(from viewController: UIViewController) {
+            PlaidService.shared.presentPlaidLink(
+                from: viewController,
+                onSuccess: { [weak self] publicToken in
+                    self?.handler = nil
+                    self?.isPresented = false
+                    self?.onSuccess(publicToken)
+                },
+                onExit: { [weak self] error in
+                    self?.handler = nil
+                    self?.isPresented = false
+                    self?.onExit(error)
+                }
+            )
+        }
+    }
+}
 
 #Preview {
     PlaidConnectionView(showPlaidConnection: .constant(true))

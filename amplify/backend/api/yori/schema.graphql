@@ -9,15 +9,15 @@ type UserProfile @model
   @auth(rules: [
     { allow: public, operations: [create, read, update, delete] }
   ]) {
-  id: ID!
-  firebaseUID: String! @index(name: "byFirebaseUID")
+  id: ID
+  firebaseUID: String @index(name: "byFirebaseUID")
   email: String
   displayName: String
-  onboardingCompleted: Boolean!
-  hasConnectedAccounts: Boolean!
+  onboardingCompleted: Boolean
+  hasConnectedAccounts: Boolean
   preferredCurrency: String
-  createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 
   # Relationships
   connectedAccounts: [ConnectedAccount] @hasMany(indexName: "byUserProfile", fields: ["id"])
@@ -99,6 +99,12 @@ enum AccountType {
   OTHER
 }
 
+# Plaid Link Token Response
+type PlaidLinkToken {
+  linkToken: String!
+  expiration: String
+}
+
 # Custom Mutations for Firebase Integration
 type Mutation {
   # Create user profile with Firebase UID verification
@@ -107,6 +113,11 @@ type Mutation {
     email: String
     displayName: String
   ): UserProfile @function(name: "createUserProfileWithFirebase-${env}")
+
+  # Create Plaid Link token for connecting accounts
+  createPlaidLinkToken(
+    userProfileID: ID!
+  ): PlaidLinkToken @function(name: "createPlaidLinkToken-${env}")
 
   # Sync Plaid accounts after Link flow
   syncPlaidAccounts(
@@ -127,7 +138,7 @@ type Mutation {
 
 # Custom Queries for optimized data fetching
 type Query {
-  # Get user profile by Firebase UID
+  # Get user profile by Firebase UID (throws USER_NOT_FOUND error if not found)
   getUserProfileByFirebaseUID(
     firebaseUID: String!
   ): UserProfile @function(name: "getUserProfileByFirebaseUID-${env}")

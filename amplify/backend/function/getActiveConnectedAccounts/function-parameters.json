@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "storage": {
+      "ConnectedAccount:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "yorihandlers",
+      "env": "yori",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ]
+}

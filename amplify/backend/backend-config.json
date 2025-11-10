@@ -39,7 +39,63 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "createPlaidLinkToken": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "createUserProfileWithFirebase": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "yori"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getActiveConnectedAccounts": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "yori"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "yorihandlers"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getFinancialSummaryForUser": {
       "build": true,
       "dependsOn": [
         {
@@ -164,6 +220,46 @@
         }
       ]
     },
+    "AMPLIFY_function_createPlaidLinkToken_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPlaidLinkToken"
+        }
+      ]
+    },
+    "AMPLIFY_function_createPlaidLinkToken_plaidClientId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPlaidLinkToken"
+        }
+      ]
+    },
+    "AMPLIFY_function_createPlaidLinkToken_plaidEnv": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPlaidLinkToken"
+        }
+      ]
+    },
+    "AMPLIFY_function_createPlaidLinkToken_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPlaidLinkToken"
+        }
+      ]
+    },
+    "AMPLIFY_function_createPlaidLinkToken_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createPlaidLinkToken"
+        }
+      ]
+    },
     "AMPLIFY_function_createUserProfileWithFirebase_deploymentBucketName": {
       "usedBy": [
         {
@@ -217,6 +313,38 @@
         {
           "category": "function",
           "resourceName": "createUserProfileWithFirebase"
+        }
+      ]
+    },
+    "AMPLIFY_function_getActiveConnectedAccounts_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getActiveConnectedAccounts"
+        }
+      ]
+    },
+    "AMPLIFY_function_getActiveConnectedAccounts_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getActiveConnectedAccounts"
+        }
+      ]
+    },
+    "AMPLIFY_function_getFinancialSummaryForUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getFinancialSummaryForUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_getFinancialSummaryForUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getFinancialSummaryForUser"
         }
       ]
     },

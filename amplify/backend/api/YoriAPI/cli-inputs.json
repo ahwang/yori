@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/userprofile/firebase/{firebaseUID}": {
+      "name": "/userprofile/firebase/{firebaseUID}",
+      "lambdaFunction": "getUserProfileByFirebaseUID",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/userprofile": {
+      "name": "/userprofile",
+      "lambdaFunction": "createUserProfileWithFirebase",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "permissions": {},
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "yorihandlers",
+      "env": "yori",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "plaidClientId",
+      "environmentVariableName": "PLAID_CLIENT_ID"
+    },
+    {
+      "cloudFormationParameterName": "plaidEnv",
+      "environmentVariableName": "PLAID_ENV"
+    }
+  ],
+  "secretNames": [
+    "PLAID_SECRET"
+  ]
+}

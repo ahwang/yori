@@ -8,6 +8,7 @@
 import Foundation
 import Amplify
 import FirebaseAuth
+internal import AWSPluginsCore
 
 class AmplifyAPIService {
     static let shared = AmplifyAPIService()
@@ -20,27 +21,26 @@ class AmplifyAPIService {
         guard let user = Auth.auth().currentUser else {
             throw APIError.httpStatusError(401, HTTPURLResponse.init())
         }
-
-        // First try to get existing profile by Firebase UID
+        
         let request = GraphQLRequest<UserProfile?>(
             document: getUserProfileByFirebaseUIDQuery,
             variables: ["firebaseUID": user.uid],
-            responseType: UserProfile?.self
+            responseType: UserProfile?.self,
+            decodePath: "getUserProfileByFirebaseUID"
         )
-
         let result = try await Amplify.API.query(request: request)
-
+        
         switch result {
-        case .success(let userProfile):
-            if let profile = userProfile {
+        case .success(let profile):
+            if let profile = profile {
                 return profile
             } else {
-                // Create new profile if doesn't exist
                 return try await createUserProfile(firebaseUID: user.uid, email: user.email, displayName: user.displayName)
             }
         case .failure(let error):
             throw error
         }
+        
     }
 
     func createUserProfile(firebaseUID: String, email: String?, displayName: String?) async throws -> UserProfile {
@@ -114,7 +114,8 @@ class AmplifyAPIService {
         let request = GraphQLRequest<[ConnectedAccount]>(
             document: listConnectedAccountsByUserQuery,
             variables: ["userProfileID": userProfile.id],
-            responseType: [ConnectedAccount].self
+            responseType: [ConnectedAccount].self,
+            decodePath: "getActiveConnectedAccounts"
         )
 
         let result = try await Amplify.API.query(request: request)
@@ -180,7 +181,8 @@ class AmplifyAPIService {
         let getRequest = GraphQLRequest<FinancialSummary?>(
             document: getFinancialSummaryQuery,
             variables: ["userProfileID": userProfile.id],
-            responseType: FinancialSummary?.self
+            responseType: FinancialSummary?.self,
+            decodePath: "getFinancialSummaryForUser"
         )
 
         let getResult = try await Amplify.API.query(request: getRequest)

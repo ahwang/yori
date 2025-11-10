@@ -39,14 +39,14 @@ extension UserProfile {
     
     model.fields(
       .field(userProfile.id, is: .required, ofType: .string),
-      .field(userProfile.firebaseUID, is: .required, ofType: .string),
+      .field(userProfile.firebaseUID, is: .optional, ofType: .string),
       .field(userProfile.email, is: .optional, ofType: .string),
       .field(userProfile.displayName, is: .optional, ofType: .string),
-      .field(userProfile.onboardingCompleted, is: .required, ofType: .bool),
-      .field(userProfile.hasConnectedAccounts, is: .required, ofType: .bool),
+      .field(userProfile.onboardingCompleted, is: .optional, ofType: .bool),
+      .field(userProfile.hasConnectedAccounts, is: .optional, ofType: .bool),
       .field(userProfile.preferredCurrency, is: .optional, ofType: .string),
-      .field(userProfile.createdAt, is: .required, ofType: .dateTime),
-      .field(userProfile.updatedAt, is: .required, ofType: .dateTime),
+      .field(userProfile.createdAt, is: .optional, ofType: .dateTime),
+      .field(userProfile.updatedAt, is: .optional, ofType: .dateTime),
       .hasMany(userProfile.connectedAccounts, is: .optional, ofType: ConnectedAccount.self, associatedWith: ConnectedAccount.keys.userProfile),
       .hasMany(userProfile.financialSummaries, is: .optional, ofType: FinancialSummary.self, associatedWith: FinancialSummary.keys.userProfile),
       .hasMany(userProfile.plaidTokens, is: .optional, ofType: PlaidToken.self, associatedWith: PlaidToken.keys.userProfile)

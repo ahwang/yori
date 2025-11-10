@@ -482,7 +482,7 @@ public enum AccountType: RawRepresentable, Equatable, JSONDecodable, JSONEncodab
 public struct CreateUserProfileInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: GraphQLID? = nil, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
+  public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
     graphQLMap = ["id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt]
   }
 
@@ -495,9 +495,9 @@ public struct CreateUserProfileInput: GraphQLMapConvertible {
     }
   }
 
-  public var firebaseUid: String {
+  public var firebaseUid: String? {
     get {
-      return graphQLMap["firebaseUID"] as! String
+      return graphQLMap["firebaseUID"] as! String?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "firebaseUID")
@@ -522,18 +522,18 @@ public struct CreateUserProfileInput: GraphQLMapConvertible {
     }
   }
 
-  public var onboardingCompleted: Bool {
+  public var onboardingCompleted: Bool? {
     get {
-      return graphQLMap["onboardingCompleted"] as! Bool
+      return graphQLMap["onboardingCompleted"] as! Bool?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "onboardingCompleted")
     }
   }
 
-  public var hasConnectedAccounts: Bool {
+  public var hasConnectedAccounts: Bool? {
     get {
-      return graphQLMap["hasConnectedAccounts"] as! Bool
+      return graphQLMap["hasConnectedAccounts"] as! Bool?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -3778,15 +3778,15 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -3798,7 +3798,7 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -3811,18 +3811,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -3847,18 +3847,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -3874,18 +3874,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -4126,15 +4126,15 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -4146,7 +4146,7 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -4159,18 +4159,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -4195,18 +4195,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -4222,18 +4222,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -4568,15 +4568,15 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -4588,7 +4588,7 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -4601,18 +4601,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -4637,18 +4637,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -4664,18 +4664,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -5010,15 +5010,15 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -5030,7 +5030,7 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -5043,18 +5043,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -5079,18 +5079,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -5106,18 +5106,18 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -5262,6 +5262,95 @@ public final class CreateUserProfileWithFirebaseMutation: GraphQLMutation {
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+
+public final class CreatePlaidLinkTokenMutation: GraphQLMutation {
+  public static let operationString =
+    "mutation CreatePlaidLinkToken($userProfileID: ID!) {\n  createPlaidLinkToken(userProfileID: $userProfileID) {\n    __typename\n    linkToken\n    expiration\n  }\n}"
+
+  public var userProfileID: GraphQLID
+
+  public init(userProfileID: GraphQLID) {
+    self.userProfileID = userProfileID
+  }
+
+  public var variables: GraphQLMap? {
+    return ["userProfileID": userProfileID]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("createPlaidLinkToken", arguments: ["userProfileID": GraphQLVariable("userProfileID")], type: .object(CreatePlaidLinkToken.selections)),
+    ]
+
+    public var snapshot: Snapshot
+
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    public init(createPlaidLinkToken: CreatePlaidLinkToken? = nil) {
+      self.init(snapshot: ["__typename": "Mutation", "createPlaidLinkToken": createPlaidLinkToken.flatMap { $0.snapshot }])
+    }
+
+    public var createPlaidLinkToken: CreatePlaidLinkToken? {
+      get {
+        return (snapshot["createPlaidLinkToken"] as? Snapshot).flatMap { CreatePlaidLinkToken(snapshot: $0) }
+      }
+      set {
+        snapshot.updateValue(newValue?.snapshot, forKey: "createPlaidLinkToken")
+      }
+    }
+
+    public struct CreatePlaidLinkToken: GraphQLSelectionSet {
+      public static let possibleTypes = ["PlaidLinkToken"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("linkToken", type: .nonNull(.scalar(String.self))),
+        GraphQLField("expiration", type: .scalar(String.self)),
+      ]
+
+      public var snapshot: Snapshot
+
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      public init(linkToken: String, expiration: String? = nil) {
+        self.init(snapshot: ["__typename": "PlaidLinkToken", "linkToken": linkToken, "expiration": expiration])
+      }
+
+      public var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var linkToken: String {
+        get {
+          return snapshot["linkToken"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "linkToken")
+        }
+      }
+
+      public var expiration: String? {
+        get {
+          return snapshot["expiration"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "expiration")
         }
       }
     }
@@ -5471,15 +5560,15 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -5491,7 +5580,7 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -5504,18 +5593,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -5540,18 +5629,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -5567,18 +5656,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -5819,15 +5908,15 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -5836,7 +5925,7 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -5849,18 +5938,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -5885,18 +5974,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -5912,18 +6001,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -6120,15 +6209,15 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -6137,7 +6226,7 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -6150,18 +6239,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -6186,18 +6275,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -6213,18 +6302,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -6421,15 +6510,15 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -6438,7 +6527,7 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -6451,18 +6540,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -6487,18 +6576,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -6514,18 +6603,18 @@ public final class SyncPlaidAccountsMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -6720,15 +6809,15 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -6740,7 +6829,7 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -6753,18 +6842,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -6789,18 +6878,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -6816,18 +6905,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -7068,15 +7157,15 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -7085,7 +7174,7 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -7098,18 +7187,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -7134,18 +7223,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -7161,18 +7250,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -7369,15 +7458,15 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -7386,7 +7475,7 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -7399,18 +7488,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -7435,18 +7524,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -7462,18 +7551,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -7670,15 +7759,15 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -7687,7 +7776,7 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -7700,18 +7789,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -7736,18 +7825,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -7763,18 +7852,18 @@ public final class CalculateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -7989,15 +8078,15 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -8009,7 +8098,7 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -8022,18 +8111,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -8058,18 +8147,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -8085,18 +8174,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -8337,15 +8426,15 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -8354,7 +8443,7 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -8367,18 +8456,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -8403,18 +8492,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -8430,18 +8519,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -8638,15 +8727,15 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -8655,7 +8744,7 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -8668,18 +8757,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -8704,18 +8793,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -8731,18 +8820,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -8939,15 +9028,15 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -8956,7 +9045,7 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -8969,18 +9058,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -9005,18 +9094,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -9032,18 +9121,18 @@ public final class RefreshAccountBalancesMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -9104,15 +9193,15 @@ public final class CreateUserProfileMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -9124,7 +9213,7 @@ public final class CreateUserProfileMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -9137,18 +9226,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -9173,18 +9262,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -9200,18 +9289,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -9452,15 +9541,15 @@ public final class CreateUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -9472,7 +9561,7 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -9485,18 +9574,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -9521,18 +9610,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -9548,18 +9637,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -9894,15 +9983,15 @@ public final class CreateUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -9914,7 +10003,7 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -9927,18 +10016,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -9963,18 +10052,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -9990,18 +10079,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -10336,15 +10425,15 @@ public final class CreateUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -10356,7 +10445,7 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -10369,18 +10458,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -10405,18 +10494,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -10432,18 +10521,18 @@ public final class CreateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -10641,15 +10730,15 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -10661,7 +10750,7 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -10674,18 +10763,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -10710,18 +10799,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -10737,18 +10826,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -10989,15 +11078,15 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -11009,7 +11098,7 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -11022,18 +11111,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -11058,18 +11147,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -11085,18 +11174,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -11431,15 +11520,15 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -11451,7 +11540,7 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -11464,18 +11553,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -11500,18 +11589,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -11527,18 +11616,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -11873,15 +11962,15 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -11893,7 +11982,7 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -11906,18 +11995,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -11942,18 +12031,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -11969,18 +12058,18 @@ public final class UpdateUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -12178,15 +12267,15 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -12198,7 +12287,7 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -12211,18 +12300,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -12247,18 +12336,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -12274,18 +12363,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -12526,15 +12615,15 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -12546,7 +12635,7 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -12559,18 +12648,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -12595,18 +12684,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -12622,18 +12711,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -12968,15 +13057,15 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -12988,7 +13077,7 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -13001,18 +13090,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -13037,18 +13126,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -13064,18 +13153,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -13410,15 +13499,15 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -13430,7 +13519,7 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -13443,18 +13532,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -13479,18 +13568,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -13506,18 +13595,18 @@ public final class DeleteUserProfileMutation: GraphQLMutation {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -13871,15 +13960,15 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -13891,7 +13980,7 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -13904,18 +13993,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -13940,18 +14029,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -13967,18 +14056,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -14219,15 +14308,15 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -14236,7 +14325,7 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -14249,18 +14338,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -14285,18 +14374,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -14312,18 +14401,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -14520,15 +14609,15 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -14537,7 +14626,7 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -14550,18 +14639,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -14586,18 +14675,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -14613,18 +14702,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -14821,15 +14910,15 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -14838,7 +14927,7 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -14851,18 +14940,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -14887,18 +14976,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -14914,18 +15003,18 @@ public final class CreateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -15142,15 +15231,15 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -15162,7 +15251,7 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -15175,18 +15264,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -15211,18 +15300,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -15238,18 +15327,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -15490,15 +15579,15 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -15507,7 +15596,7 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -15520,18 +15609,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -15556,18 +15645,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -15583,18 +15672,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -15791,15 +15880,15 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -15808,7 +15897,7 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -15821,18 +15910,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -15857,18 +15946,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -15884,18 +15973,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -16092,15 +16181,15 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -16109,7 +16198,7 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -16122,18 +16211,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -16158,18 +16247,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -16185,18 +16274,18 @@ public final class UpdateConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -16413,15 +16502,15 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -16433,7 +16522,7 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -16446,18 +16535,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -16482,18 +16571,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -16509,18 +16598,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -16761,15 +16850,15 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -16778,7 +16867,7 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -16791,18 +16880,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -16827,18 +16916,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -16854,18 +16943,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -17062,15 +17151,15 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -17079,7 +17168,7 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -17092,18 +17181,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -17128,18 +17217,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -17155,18 +17244,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -17363,15 +17452,15 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -17380,7 +17469,7 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -17393,18 +17482,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -17429,18 +17518,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -17456,18 +17545,18 @@ public final class DeleteConnectedAccountMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -17664,15 +17753,15 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -17684,7 +17773,7 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -17697,18 +17786,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -17733,18 +17822,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -17760,18 +17849,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -18012,15 +18101,15 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -18029,7 +18118,7 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -18042,18 +18131,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -18078,18 +18167,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -18105,18 +18194,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -18313,15 +18402,15 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -18330,7 +18419,7 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -18343,18 +18432,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -18379,18 +18468,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -18406,18 +18495,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -18614,15 +18703,15 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -18631,7 +18720,7 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -18644,18 +18733,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -18680,18 +18769,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -18707,18 +18796,18 @@ public final class CreatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -18915,15 +19004,15 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -18935,7 +19024,7 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -18948,18 +19037,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -18984,18 +19073,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -19011,18 +19100,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -19263,15 +19352,15 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -19280,7 +19369,7 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -19293,18 +19382,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -19329,18 +19418,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -19356,18 +19445,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -19564,15 +19653,15 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -19581,7 +19670,7 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -19594,18 +19683,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -19630,18 +19719,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -19657,18 +19746,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -19865,15 +19954,15 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -19882,7 +19971,7 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -19895,18 +19984,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -19931,18 +20020,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -19958,18 +20047,18 @@ public final class UpdatePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -20166,15 +20255,15 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -20186,7 +20275,7 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -20199,18 +20288,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -20235,18 +20324,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -20262,18 +20351,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -20514,15 +20603,15 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -20531,7 +20620,7 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -20544,18 +20633,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -20580,18 +20669,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -20607,18 +20696,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -20815,15 +20904,15 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -20832,7 +20921,7 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -20845,18 +20934,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -20881,18 +20970,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -20908,18 +20997,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -21116,15 +21205,15 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -21133,7 +21222,7 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -21146,18 +21235,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -21182,18 +21271,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -21209,18 +21298,18 @@ public final class DeletePlaidTokenMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -21417,15 +21506,15 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -21437,7 +21526,7 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -21450,18 +21539,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -21486,18 +21575,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -21513,18 +21602,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -21765,15 +21854,15 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -21782,7 +21871,7 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -21795,18 +21884,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -21831,18 +21920,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -21858,18 +21947,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -22066,15 +22155,15 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -22083,7 +22172,7 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -22096,18 +22185,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -22132,18 +22221,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -22159,18 +22248,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -22367,15 +22456,15 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -22384,7 +22473,7 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -22397,18 +22486,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -22433,18 +22522,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -22460,18 +22549,18 @@ public final class CreateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -22668,15 +22757,15 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -22688,7 +22777,7 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -22701,18 +22790,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -22737,18 +22826,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -22764,18 +22853,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -23016,15 +23105,15 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -23033,7 +23122,7 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -23046,18 +23135,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -23082,18 +23171,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -23109,18 +23198,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -23317,15 +23406,15 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -23334,7 +23423,7 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -23347,18 +23436,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -23383,18 +23472,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -23410,18 +23499,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -23618,15 +23707,15 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -23635,7 +23724,7 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -23648,18 +23737,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -23684,18 +23773,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -23711,18 +23800,18 @@ public final class UpdateFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -23919,15 +24008,15 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -23939,7 +24028,7 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -23952,18 +24041,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -23988,18 +24077,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -24015,18 +24104,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -24267,15 +24356,15 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -24284,7 +24373,7 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -24297,18 +24386,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -24333,18 +24422,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -24360,18 +24449,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -24568,15 +24657,15 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -24585,7 +24674,7 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -24598,18 +24687,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -24634,18 +24723,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -24661,18 +24750,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -24869,15 +24958,15 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -24886,7 +24975,7 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -24899,18 +24988,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -24935,18 +25024,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -24962,18 +25051,18 @@ public final class DeleteFinancialSummaryMutation: GraphQLMutation {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -25032,15 +25121,15 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -25052,7 +25141,7 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -25065,18 +25154,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -25101,18 +25190,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -25128,18 +25217,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -25380,15 +25469,15 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -25400,7 +25489,7 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -25413,18 +25502,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -25449,18 +25538,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -25476,18 +25565,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -25822,15 +25911,15 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -25842,7 +25931,7 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -25855,18 +25944,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -25891,18 +25980,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -25918,18 +26007,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -26264,15 +26353,15 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -26284,7 +26373,7 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -26297,18 +26386,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -26333,18 +26422,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -26360,18 +26449,18 @@ public final class GetUserProfileByFirebaseUidQuery: GraphQLQuery {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -26703,15 +26792,15 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -26723,7 +26812,7 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -26736,18 +26825,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -26772,18 +26861,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -26799,18 +26888,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -27051,15 +27140,15 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -27068,7 +27157,7 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -27081,18 +27170,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -27117,18 +27206,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -27144,18 +27233,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -27352,15 +27441,15 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -27369,7 +27458,7 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -27382,18 +27471,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -27418,18 +27507,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -27445,18 +27534,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -27653,15 +27742,15 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -27670,7 +27759,7 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -27683,18 +27772,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -27719,18 +27808,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -27746,18 +27835,18 @@ public final class GetFinancialSummaryForUserQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -27972,15 +28061,15 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -27992,7 +28081,7 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -28005,18 +28094,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -28041,18 +28130,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -28068,18 +28157,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -28320,15 +28409,15 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -28337,7 +28426,7 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -28350,18 +28439,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -28386,18 +28475,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -28413,18 +28502,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -28621,15 +28710,15 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -28638,7 +28727,7 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -28651,18 +28740,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -28687,18 +28776,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -28714,18 +28803,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -28922,15 +29011,15 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -28939,7 +29028,7 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -28952,18 +29041,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -28988,18 +29077,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -29015,18 +29104,18 @@ public final class GetActiveConnectedAccountsQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -29085,15 +29174,15 @@ public final class GetUserProfileQuery: GraphQLQuery {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -29105,7 +29194,7 @@ public final class GetUserProfileQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -29118,18 +29207,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -29154,18 +29243,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -29181,18 +29270,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -29433,15 +29522,15 @@ public final class GetUserProfileQuery: GraphQLQuery {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -29453,7 +29542,7 @@ public final class GetUserProfileQuery: GraphQLQuery {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -29466,18 +29555,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -29502,18 +29591,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -29529,18 +29618,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -29875,15 +29964,15 @@ public final class GetUserProfileQuery: GraphQLQuery {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -29895,7 +29984,7 @@ public final class GetUserProfileQuery: GraphQLQuery {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -29908,18 +29997,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -29944,18 +30033,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -29971,18 +30060,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -30317,15 +30406,15 @@ public final class GetUserProfileQuery: GraphQLQuery {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -30337,7 +30426,7 @@ public final class GetUserProfileQuery: GraphQLQuery {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -30350,18 +30439,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -30386,18 +30475,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -30413,18 +30502,18 @@ public final class GetUserProfileQuery: GraphQLQuery {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -30670,15 +30759,15 @@ public final class ListUserProfilesQuery: GraphQLQuery {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -30690,7 +30779,7 @@ public final class ListUserProfilesQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -30703,18 +30792,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -30739,18 +30828,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -30766,18 +30855,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -31018,15 +31107,15 @@ public final class ListUserProfilesQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -31035,7 +31124,7 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -31048,18 +31137,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -31084,18 +31173,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -31111,18 +31200,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -31319,15 +31408,15 @@ public final class ListUserProfilesQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -31336,7 +31425,7 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -31349,18 +31438,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -31385,18 +31474,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -31412,18 +31501,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -31620,15 +31709,15 @@ public final class ListUserProfilesQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -31637,7 +31726,7 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -31650,18 +31739,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -31686,18 +31775,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -31713,18 +31802,18 @@ public final class ListUserProfilesQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -31939,15 +32028,15 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -31959,7 +32048,7 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -31972,18 +32061,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -32008,18 +32097,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -32035,18 +32124,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -32287,15 +32376,15 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -32304,7 +32393,7 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -32317,18 +32406,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -32353,18 +32442,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -32380,18 +32469,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -32588,15 +32677,15 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -32605,7 +32694,7 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -32618,18 +32707,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -32654,18 +32743,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -32681,18 +32770,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -32889,15 +32978,15 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -32906,7 +32995,7 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -32919,18 +33008,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -32955,18 +33044,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -32982,18 +33071,18 @@ public final class GetConnectedAccountQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -33258,15 +33347,15 @@ public final class ListConnectedAccountsQuery: GraphQLQuery {
 
           public static let selections: [GraphQLSelection] = [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-            GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .scalar(GraphQLID.self)),
+            GraphQLField("firebaseUID", type: .scalar(String.self)),
             GraphQLField("email", type: .scalar(String.self)),
             GraphQLField("displayName", type: .scalar(String.self)),
-            GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+            GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+            GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
             GraphQLField("preferredCurrency", type: .scalar(String.self)),
-            GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-            GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+            GraphQLField("createdAt", type: .scalar(String.self)),
+            GraphQLField("updatedAt", type: .scalar(String.self)),
             GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
             GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
             GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -33278,7 +33367,7 @@ public final class ListConnectedAccountsQuery: GraphQLQuery {
             self.snapshot = snapshot
           }
 
-          public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+          public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
             self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
           }
 
@@ -33291,18 +33380,18 @@ public final class ListConnectedAccountsQuery: GraphQLQuery {
             }
           }
 
-          public var id: GraphQLID {
+          public var id: GraphQLID? {
             get {
-              return snapshot["id"]! as! GraphQLID
+              return snapshot["id"] as? GraphQLID
             }
             set {
               snapshot.updateValue(newValue, forKey: "id")
             }
           }
 
-          public var firebaseUid: String {
+          public var firebaseUid: String? {
             get {
-              return snapshot["firebaseUID"]! as! String
+              return snapshot["firebaseUID"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -33327,18 +33416,18 @@ public final class ListConnectedAccountsQuery: GraphQLQuery {
             }
           }
 
-          public var onboardingCompleted: Bool {
+          public var onboardingCompleted: Bool? {
             get {
-              return snapshot["onboardingCompleted"]! as! Bool
+              return snapshot["onboardingCompleted"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "onboardingCompleted")
             }
           }
 
-          public var hasConnectedAccounts: Bool {
+          public var hasConnectedAccounts: Bool? {
             get {
-              return snapshot["hasConnectedAccounts"]! as! Bool
+              return snapshot["hasConnectedAccounts"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -33354,18 +33443,18 @@ public final class ListConnectedAccountsQuery: GraphQLQuery {
             }
           }
 
-          public var createdAt: String {
+          public var createdAt: String? {
             get {
-              return snapshot["createdAt"]! as! String
+              return snapshot["createdAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "createdAt")
             }
           }
 
-          public var updatedAt: String {
+          public var updatedAt: String? {
             get {
-              return snapshot["updatedAt"]! as! String
+              return snapshot["updatedAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -34127,15 +34216,15 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -34147,7 +34236,7 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -34160,18 +34249,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -34196,18 +34285,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -34223,18 +34312,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -34475,15 +34564,15 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -34492,7 +34581,7 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -34505,18 +34594,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -34541,18 +34630,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -34568,18 +34657,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -34776,15 +34865,15 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -34793,7 +34882,7 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -34806,18 +34895,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -34842,18 +34931,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -34869,18 +34958,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -35077,15 +35166,15 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -35094,7 +35183,7 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -35107,18 +35196,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -35143,18 +35232,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -35170,18 +35259,18 @@ public final class GetPlaidTokenQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -35426,15 +35515,15 @@ public final class ListPlaidTokensQuery: GraphQLQuery {
 
           public static let selections: [GraphQLSelection] = [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-            GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .scalar(GraphQLID.self)),
+            GraphQLField("firebaseUID", type: .scalar(String.self)),
             GraphQLField("email", type: .scalar(String.self)),
             GraphQLField("displayName", type: .scalar(String.self)),
-            GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+            GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+            GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
             GraphQLField("preferredCurrency", type: .scalar(String.self)),
-            GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-            GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+            GraphQLField("createdAt", type: .scalar(String.self)),
+            GraphQLField("updatedAt", type: .scalar(String.self)),
             GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
             GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
             GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -35446,7 +35535,7 @@ public final class ListPlaidTokensQuery: GraphQLQuery {
             self.snapshot = snapshot
           }
 
-          public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+          public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
             self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
           }
 
@@ -35459,18 +35548,18 @@ public final class ListPlaidTokensQuery: GraphQLQuery {
             }
           }
 
-          public var id: GraphQLID {
+          public var id: GraphQLID? {
             get {
-              return snapshot["id"]! as! GraphQLID
+              return snapshot["id"] as? GraphQLID
             }
             set {
               snapshot.updateValue(newValue, forKey: "id")
             }
           }
 
-          public var firebaseUid: String {
+          public var firebaseUid: String? {
             get {
-              return snapshot["firebaseUID"]! as! String
+              return snapshot["firebaseUID"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -35495,18 +35584,18 @@ public final class ListPlaidTokensQuery: GraphQLQuery {
             }
           }
 
-          public var onboardingCompleted: Bool {
+          public var onboardingCompleted: Bool? {
             get {
-              return snapshot["onboardingCompleted"]! as! Bool
+              return snapshot["onboardingCompleted"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "onboardingCompleted")
             }
           }
 
-          public var hasConnectedAccounts: Bool {
+          public var hasConnectedAccounts: Bool? {
             get {
-              return snapshot["hasConnectedAccounts"]! as! Bool
+              return snapshot["hasConnectedAccounts"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -35522,18 +35611,18 @@ public final class ListPlaidTokensQuery: GraphQLQuery {
             }
           }
 
-          public var createdAt: String {
+          public var createdAt: String? {
             get {
-              return snapshot["createdAt"]! as! String
+              return snapshot["createdAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "createdAt")
             }
           }
 
-          public var updatedAt: String {
+          public var updatedAt: String? {
             get {
-              return snapshot["updatedAt"]! as! String
+              return snapshot["updatedAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -36295,15 +36384,15 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -36315,7 +36404,7 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -36328,18 +36417,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -36364,18 +36453,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -36391,18 +36480,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -36643,15 +36732,15 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -36660,7 +36749,7 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -36673,18 +36762,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -36709,18 +36798,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -36736,18 +36825,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -36944,15 +37033,15 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -36961,7 +37050,7 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -36974,18 +37063,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -37010,18 +37099,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -37037,18 +37126,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -37245,15 +37334,15 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -37262,7 +37351,7 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -37275,18 +37364,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -37311,18 +37400,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -37338,18 +37427,18 @@ public final class GetFinancialSummaryQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -37594,15 +37683,15 @@ public final class ListFinancialSummariesQuery: GraphQLQuery {
 
           public static let selections: [GraphQLSelection] = [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-            GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .scalar(GraphQLID.self)),
+            GraphQLField("firebaseUID", type: .scalar(String.self)),
             GraphQLField("email", type: .scalar(String.self)),
             GraphQLField("displayName", type: .scalar(String.self)),
-            GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+            GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+            GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
             GraphQLField("preferredCurrency", type: .scalar(String.self)),
-            GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-            GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+            GraphQLField("createdAt", type: .scalar(String.self)),
+            GraphQLField("updatedAt", type: .scalar(String.self)),
             GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
             GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
             GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -37614,7 +37703,7 @@ public final class ListFinancialSummariesQuery: GraphQLQuery {
             self.snapshot = snapshot
           }
 
-          public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+          public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
             self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
           }
 
@@ -37627,18 +37716,18 @@ public final class ListFinancialSummariesQuery: GraphQLQuery {
             }
           }
 
-          public var id: GraphQLID {
+          public var id: GraphQLID? {
             get {
-              return snapshot["id"]! as! GraphQLID
+              return snapshot["id"] as? GraphQLID
             }
             set {
               snapshot.updateValue(newValue, forKey: "id")
             }
           }
 
-          public var firebaseUid: String {
+          public var firebaseUid: String? {
             get {
-              return snapshot["firebaseUID"]! as! String
+              return snapshot["firebaseUID"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -37663,18 +37752,18 @@ public final class ListFinancialSummariesQuery: GraphQLQuery {
             }
           }
 
-          public var onboardingCompleted: Bool {
+          public var onboardingCompleted: Bool? {
             get {
-              return snapshot["onboardingCompleted"]! as! Bool
+              return snapshot["onboardingCompleted"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "onboardingCompleted")
             }
           }
 
-          public var hasConnectedAccounts: Bool {
+          public var hasConnectedAccounts: Bool? {
             get {
-              return snapshot["hasConnectedAccounts"]! as! Bool
+              return snapshot["hasConnectedAccounts"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -37690,18 +37779,18 @@ public final class ListFinancialSummariesQuery: GraphQLQuery {
             }
           }
 
-          public var createdAt: String {
+          public var createdAt: String? {
             get {
-              return snapshot["createdAt"]! as! String
+              return snapshot["createdAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "createdAt")
             }
           }
 
-          public var updatedAt: String {
+          public var updatedAt: String? {
             get {
-              return snapshot["updatedAt"]! as! String
+              return snapshot["updatedAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -38381,15 +38470,15 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -38401,7 +38490,7 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -38414,18 +38503,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -38450,18 +38539,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -38477,18 +38566,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -38729,15 +38818,15 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -38746,7 +38835,7 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -38759,18 +38848,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -38795,18 +38884,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -38822,18 +38911,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -39030,15 +39119,15 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -39047,7 +39136,7 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -39060,18 +39149,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -39096,18 +39185,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -39123,18 +39212,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -39331,15 +39420,15 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -39348,7 +39437,7 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -39361,18 +39450,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -39397,18 +39486,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -39424,18 +39513,18 @@ public final class UserProfilesByFirebaseUidQuery: GraphQLQuery {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -39704,15 +39793,15 @@ public final class ConnectedAccountsByUserProfileIdQuery: GraphQLQuery {
 
           public static let selections: [GraphQLSelection] = [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-            GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .scalar(GraphQLID.self)),
+            GraphQLField("firebaseUID", type: .scalar(String.self)),
             GraphQLField("email", type: .scalar(String.self)),
             GraphQLField("displayName", type: .scalar(String.self)),
-            GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+            GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+            GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
             GraphQLField("preferredCurrency", type: .scalar(String.self)),
-            GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-            GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+            GraphQLField("createdAt", type: .scalar(String.self)),
+            GraphQLField("updatedAt", type: .scalar(String.self)),
             GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
             GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
             GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -39724,7 +39813,7 @@ public final class ConnectedAccountsByUserProfileIdQuery: GraphQLQuery {
             self.snapshot = snapshot
           }
 
-          public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+          public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
             self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
           }
 
@@ -39737,18 +39826,18 @@ public final class ConnectedAccountsByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var id: GraphQLID {
+          public var id: GraphQLID? {
             get {
-              return snapshot["id"]! as! GraphQLID
+              return snapshot["id"] as? GraphQLID
             }
             set {
               snapshot.updateValue(newValue, forKey: "id")
             }
           }
 
-          public var firebaseUid: String {
+          public var firebaseUid: String? {
             get {
-              return snapshot["firebaseUID"]! as! String
+              return snapshot["firebaseUID"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -39773,18 +39862,18 @@ public final class ConnectedAccountsByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var onboardingCompleted: Bool {
+          public var onboardingCompleted: Bool? {
             get {
-              return snapshot["onboardingCompleted"]! as! Bool
+              return snapshot["onboardingCompleted"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "onboardingCompleted")
             }
           }
 
-          public var hasConnectedAccounts: Bool {
+          public var hasConnectedAccounts: Bool? {
             get {
-              return snapshot["hasConnectedAccounts"]! as! Bool
+              return snapshot["hasConnectedAccounts"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -39800,18 +39889,18 @@ public final class ConnectedAccountsByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var createdAt: String {
+          public var createdAt: String? {
             get {
-              return snapshot["createdAt"]! as! String
+              return snapshot["createdAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "createdAt")
             }
           }
 
-          public var updatedAt: String {
+          public var updatedAt: String? {
             get {
-              return snapshot["updatedAt"]! as! String
+              return snapshot["updatedAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -40627,15 +40716,15 @@ public final class PlaidTokensByUserProfileIdQuery: GraphQLQuery {
 
           public static let selections: [GraphQLSelection] = [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-            GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .scalar(GraphQLID.self)),
+            GraphQLField("firebaseUID", type: .scalar(String.self)),
             GraphQLField("email", type: .scalar(String.self)),
             GraphQLField("displayName", type: .scalar(String.self)),
-            GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+            GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+            GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
             GraphQLField("preferredCurrency", type: .scalar(String.self)),
-            GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-            GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+            GraphQLField("createdAt", type: .scalar(String.self)),
+            GraphQLField("updatedAt", type: .scalar(String.self)),
             GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
             GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
             GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -40647,7 +40736,7 @@ public final class PlaidTokensByUserProfileIdQuery: GraphQLQuery {
             self.snapshot = snapshot
           }
 
-          public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+          public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
             self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
           }
 
@@ -40660,18 +40749,18 @@ public final class PlaidTokensByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var id: GraphQLID {
+          public var id: GraphQLID? {
             get {
-              return snapshot["id"]! as! GraphQLID
+              return snapshot["id"] as? GraphQLID
             }
             set {
               snapshot.updateValue(newValue, forKey: "id")
             }
           }
 
-          public var firebaseUid: String {
+          public var firebaseUid: String? {
             get {
-              return snapshot["firebaseUID"]! as! String
+              return snapshot["firebaseUID"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -40696,18 +40785,18 @@ public final class PlaidTokensByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var onboardingCompleted: Bool {
+          public var onboardingCompleted: Bool? {
             get {
-              return snapshot["onboardingCompleted"]! as! Bool
+              return snapshot["onboardingCompleted"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "onboardingCompleted")
             }
           }
 
-          public var hasConnectedAccounts: Bool {
+          public var hasConnectedAccounts: Bool? {
             get {
-              return snapshot["hasConnectedAccounts"]! as! Bool
+              return snapshot["hasConnectedAccounts"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -40723,18 +40812,18 @@ public final class PlaidTokensByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var createdAt: String {
+          public var createdAt: String? {
             get {
-              return snapshot["createdAt"]! as! String
+              return snapshot["createdAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "createdAt")
             }
           }
 
-          public var updatedAt: String {
+          public var updatedAt: String? {
             get {
-              return snapshot["updatedAt"]! as! String
+              return snapshot["updatedAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -41550,15 +41639,15 @@ public final class FinancialSummariesByUserProfileIdQuery: GraphQLQuery {
 
           public static let selections: [GraphQLSelection] = [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-            GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .scalar(GraphQLID.self)),
+            GraphQLField("firebaseUID", type: .scalar(String.self)),
             GraphQLField("email", type: .scalar(String.self)),
             GraphQLField("displayName", type: .scalar(String.self)),
-            GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-            GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+            GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+            GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
             GraphQLField("preferredCurrency", type: .scalar(String.self)),
-            GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-            GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+            GraphQLField("createdAt", type: .scalar(String.self)),
+            GraphQLField("updatedAt", type: .scalar(String.self)),
             GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
             GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
             GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -41570,7 +41659,7 @@ public final class FinancialSummariesByUserProfileIdQuery: GraphQLQuery {
             self.snapshot = snapshot
           }
 
-          public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+          public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
             self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
           }
 
@@ -41583,18 +41672,18 @@ public final class FinancialSummariesByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var id: GraphQLID {
+          public var id: GraphQLID? {
             get {
-              return snapshot["id"]! as! GraphQLID
+              return snapshot["id"] as? GraphQLID
             }
             set {
               snapshot.updateValue(newValue, forKey: "id")
             }
           }
 
-          public var firebaseUid: String {
+          public var firebaseUid: String? {
             get {
-              return snapshot["firebaseUID"]! as! String
+              return snapshot["firebaseUID"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -41619,18 +41708,18 @@ public final class FinancialSummariesByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var onboardingCompleted: Bool {
+          public var onboardingCompleted: Bool? {
             get {
-              return snapshot["onboardingCompleted"]! as! Bool
+              return snapshot["onboardingCompleted"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "onboardingCompleted")
             }
           }
 
-          public var hasConnectedAccounts: Bool {
+          public var hasConnectedAccounts: Bool? {
             get {
-              return snapshot["hasConnectedAccounts"]! as! Bool
+              return snapshot["hasConnectedAccounts"] as? Bool
             }
             set {
               snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -41646,18 +41735,18 @@ public final class FinancialSummariesByUserProfileIdQuery: GraphQLQuery {
             }
           }
 
-          public var createdAt: String {
+          public var createdAt: String? {
             get {
-              return snapshot["createdAt"]! as! String
+              return snapshot["createdAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "createdAt")
             }
           }
 
-          public var updatedAt: String {
+          public var updatedAt: String? {
             get {
-              return snapshot["updatedAt"]! as! String
+              return snapshot["updatedAt"] as? String
             }
             set {
               snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -42283,15 +42372,15 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -42303,7 +42392,7 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -42316,18 +42405,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -42352,18 +42441,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -42379,18 +42468,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -42631,15 +42720,15 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -42651,7 +42740,7 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -42664,18 +42753,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -42700,18 +42789,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -42727,18 +42816,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -43073,15 +43162,15 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -43093,7 +43182,7 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -43106,18 +43195,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -43142,18 +43231,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -43169,18 +43258,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -43515,15 +43604,15 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -43535,7 +43624,7 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -43548,18 +43637,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -43584,18 +43673,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -43611,18 +43700,18 @@ public final class OnCreateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -43818,15 +43907,15 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -43838,7 +43927,7 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -43851,18 +43940,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -43887,18 +43976,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -43914,18 +44003,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -44166,15 +44255,15 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -44186,7 +44275,7 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -44199,18 +44288,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -44235,18 +44324,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -44262,18 +44351,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -44608,15 +44697,15 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -44628,7 +44717,7 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -44641,18 +44730,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -44677,18 +44766,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -44704,18 +44793,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -45050,15 +45139,15 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -45070,7 +45159,7 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -45083,18 +45172,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -45119,18 +45208,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -45146,18 +45235,18 @@ public final class OnUpdateUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -45353,15 +45442,15 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .scalar(GraphQLID.self)),
+        GraphQLField("firebaseUID", type: .scalar(String.self)),
         GraphQLField("email", type: .scalar(String.self)),
         GraphQLField("displayName", type: .scalar(String.self)),
-        GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+        GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
         GraphQLField("preferredCurrency", type: .scalar(String.self)),
-        GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-        GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("updatedAt", type: .scalar(String.self)),
         GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
         GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
         GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -45373,7 +45462,7 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+      public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
         self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
       }
 
@@ -45386,18 +45475,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var id: GraphQLID {
+      public var id: GraphQLID? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["id"] as? GraphQLID
         }
         set {
           snapshot.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var firebaseUid: String {
+      public var firebaseUid: String? {
         get {
-          return snapshot["firebaseUID"]! as! String
+          return snapshot["firebaseUID"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -45422,18 +45511,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var onboardingCompleted: Bool {
+      public var onboardingCompleted: Bool? {
         get {
-          return snapshot["onboardingCompleted"]! as! Bool
+          return snapshot["onboardingCompleted"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "onboardingCompleted")
         }
       }
 
-      public var hasConnectedAccounts: Bool {
+      public var hasConnectedAccounts: Bool? {
         get {
-          return snapshot["hasConnectedAccounts"]! as! Bool
+          return snapshot["hasConnectedAccounts"] as? Bool
         }
         set {
           snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -45449,18 +45538,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
         }
       }
 
-      public var createdAt: String {
+      public var createdAt: String? {
         get {
-          return snapshot["createdAt"]! as! String
+          return snapshot["createdAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var updatedAt: String {
+      public var updatedAt: String? {
         get {
-          return snapshot["updatedAt"]! as! String
+          return snapshot["updatedAt"] as? String
         }
         set {
           snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -45701,15 +45790,15 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -45721,7 +45810,7 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -45734,18 +45823,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -45770,18 +45859,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -45797,18 +45886,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -46143,15 +46232,15 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -46163,7 +46252,7 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -46176,18 +46265,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -46212,18 +46301,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -46239,18 +46328,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -46585,15 +46674,15 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
 
             public static let selections: [GraphQLSelection] = [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-              GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .scalar(GraphQLID.self)),
+              GraphQLField("firebaseUID", type: .scalar(String.self)),
               GraphQLField("email", type: .scalar(String.self)),
               GraphQLField("displayName", type: .scalar(String.self)),
-              GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+              GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+              GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
               GraphQLField("preferredCurrency", type: .scalar(String.self)),
-              GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-              GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+              GraphQLField("createdAt", type: .scalar(String.self)),
+              GraphQLField("updatedAt", type: .scalar(String.self)),
               GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
               GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
               GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -46605,7 +46694,7 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               self.snapshot = snapshot
             }
 
-            public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+            public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
               self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
             }
 
@@ -46618,18 +46707,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var id: GraphQLID {
+            public var id: GraphQLID? {
               get {
-                return snapshot["id"]! as! GraphQLID
+                return snapshot["id"] as? GraphQLID
               }
               set {
                 snapshot.updateValue(newValue, forKey: "id")
               }
             }
 
-            public var firebaseUid: String {
+            public var firebaseUid: String? {
               get {
-                return snapshot["firebaseUID"]! as! String
+                return snapshot["firebaseUID"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -46654,18 +46743,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var onboardingCompleted: Bool {
+            public var onboardingCompleted: Bool? {
               get {
-                return snapshot["onboardingCompleted"]! as! Bool
+                return snapshot["onboardingCompleted"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "onboardingCompleted")
               }
             }
 
-            public var hasConnectedAccounts: Bool {
+            public var hasConnectedAccounts: Bool? {
               get {
-                return snapshot["hasConnectedAccounts"]! as! Bool
+                return snapshot["hasConnectedAccounts"] as? Bool
               }
               set {
                 snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -46681,18 +46770,18 @@ public final class OnDeleteUserProfileSubscription: GraphQLSubscription {
               }
             }
 
-            public var createdAt: String {
+            public var createdAt: String? {
               get {
-                return snapshot["createdAt"]! as! String
+                return snapshot["createdAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "createdAt")
               }
             }
 
-            public var updatedAt: String {
+            public var updatedAt: String? {
               get {
-                return snapshot["updatedAt"]! as! String
+                return snapshot["updatedAt"] as? String
               }
               set {
                 snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -47044,15 +47133,15 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -47064,7 +47153,7 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -47077,18 +47166,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -47113,18 +47202,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -47140,18 +47229,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -47392,15 +47481,15 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -47409,7 +47498,7 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -47422,18 +47511,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -47458,18 +47547,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -47485,18 +47574,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -47693,15 +47782,15 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -47710,7 +47799,7 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -47723,18 +47812,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -47759,18 +47848,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -47786,18 +47875,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -47994,15 +48083,15 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -48011,7 +48100,7 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -48024,18 +48113,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -48060,18 +48149,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -48087,18 +48176,18 @@ public final class OnCreateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -48313,15 +48402,15 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -48333,7 +48422,7 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -48346,18 +48435,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -48382,18 +48471,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -48409,18 +48498,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -48661,15 +48750,15 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -48678,7 +48767,7 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -48691,18 +48780,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -48727,18 +48816,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -48754,18 +48843,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -48962,15 +49051,15 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -48979,7 +49068,7 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -48992,18 +49081,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -49028,18 +49117,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -49055,18 +49144,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -49263,15 +49352,15 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -49280,7 +49369,7 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -49293,18 +49382,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -49329,18 +49418,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -49356,18 +49445,18 @@ public final class OnUpdateConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -49582,15 +49671,15 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -49602,7 +49691,7 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -49615,18 +49704,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -49651,18 +49740,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -49678,18 +49767,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -49930,15 +50019,15 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -49947,7 +50036,7 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -49960,18 +50049,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -49996,18 +50085,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -50023,18 +50112,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -50231,15 +50320,15 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -50248,7 +50337,7 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -50261,18 +50350,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -50297,18 +50386,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -50324,18 +50413,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -50532,15 +50621,15 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -50549,7 +50638,7 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -50562,18 +50651,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -50598,18 +50687,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -50625,18 +50714,18 @@ public final class OnDeleteConnectedAccountSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -50831,15 +50920,15 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -50851,7 +50940,7 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -50864,18 +50953,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -50900,18 +50989,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -50927,18 +51016,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -51179,15 +51268,15 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -51196,7 +51285,7 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -51209,18 +51298,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -51245,18 +51334,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -51272,18 +51361,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -51480,15 +51569,15 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -51497,7 +51586,7 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -51510,18 +51599,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -51546,18 +51635,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -51573,18 +51662,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -51781,15 +51870,15 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -51798,7 +51887,7 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -51811,18 +51900,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -51847,18 +51936,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -51874,18 +51963,18 @@ public final class OnCreatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -52080,15 +52169,15 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -52100,7 +52189,7 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -52113,18 +52202,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -52149,18 +52238,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -52176,18 +52265,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -52428,15 +52517,15 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -52445,7 +52534,7 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -52458,18 +52547,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -52494,18 +52583,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -52521,18 +52610,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -52729,15 +52818,15 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -52746,7 +52835,7 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -52759,18 +52848,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -52795,18 +52884,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -52822,18 +52911,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -53030,15 +53119,15 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -53047,7 +53136,7 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -53060,18 +53149,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -53096,18 +53185,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -53123,18 +53212,18 @@ public final class OnUpdatePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -53329,15 +53418,15 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -53349,7 +53438,7 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -53362,18 +53451,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -53398,18 +53487,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -53425,18 +53514,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -53677,15 +53766,15 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -53694,7 +53783,7 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -53707,18 +53796,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -53743,18 +53832,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -53770,18 +53859,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -53978,15 +54067,15 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -53995,7 +54084,7 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -54008,18 +54097,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -54044,18 +54133,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -54071,18 +54160,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -54279,15 +54368,15 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -54296,7 +54385,7 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -54309,18 +54398,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -54345,18 +54434,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -54372,18 +54461,18 @@ public final class OnDeletePlaidTokenSubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -54578,15 +54667,15 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -54598,7 +54687,7 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -54611,18 +54700,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -54647,18 +54736,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -54674,18 +54763,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -54926,15 +55015,15 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -54943,7 +55032,7 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -54956,18 +55045,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -54992,18 +55081,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -55019,18 +55108,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -55227,15 +55316,15 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -55244,7 +55333,7 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -55257,18 +55346,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -55293,18 +55382,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -55320,18 +55409,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -55528,15 +55617,15 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -55545,7 +55634,7 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -55558,18 +55647,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -55594,18 +55683,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -55621,18 +55710,18 @@ public final class OnCreateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -55827,15 +55916,15 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -55847,7 +55936,7 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -55860,18 +55949,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -55896,18 +55985,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -55923,18 +56012,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -56175,15 +56264,15 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -56192,7 +56281,7 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -56205,18 +56294,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -56241,18 +56330,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -56268,18 +56357,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -56476,15 +56565,15 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -56493,7 +56582,7 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -56506,18 +56595,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -56542,18 +56631,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -56569,18 +56658,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -56777,15 +56866,15 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -56794,7 +56883,7 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -56807,18 +56896,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -56843,18 +56932,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -56870,18 +56959,18 @@ public final class OnUpdateFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -57076,15 +57165,15 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(GraphQLID.self)),
+          GraphQLField("firebaseUID", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("displayName", type: .scalar(String.self)),
-          GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+          GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
           GraphQLField("preferredCurrency", type: .scalar(String.self)),
-          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("createdAt", type: .scalar(String.self)),
+          GraphQLField("updatedAt", type: .scalar(String.self)),
           GraphQLField("connectedAccounts", type: .object(ConnectedAccount.selections)),
           GraphQLField("financialSummaries", type: .object(FinancialSummary.selections)),
           GraphQLField("plaidTokens", type: .object(PlaidToken.selections)),
@@ -57096,7 +57185,7 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
+        public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, connectedAccounts: ConnectedAccount? = nil, financialSummaries: FinancialSummary? = nil, plaidTokens: PlaidToken? = nil) {
           self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt, "connectedAccounts": connectedAccounts.flatMap { $0.snapshot }, "financialSummaries": financialSummaries.flatMap { $0.snapshot }, "plaidTokens": plaidTokens.flatMap { $0.snapshot }])
         }
 
@@ -57109,18 +57198,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var id: GraphQLID {
+        public var id: GraphQLID? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["id"] as? GraphQLID
           }
           set {
             snapshot.updateValue(newValue, forKey: "id")
           }
         }
 
-        public var firebaseUid: String {
+        public var firebaseUid: String? {
           get {
-            return snapshot["firebaseUID"]! as! String
+            return snapshot["firebaseUID"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -57145,18 +57234,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var onboardingCompleted: Bool {
+        public var onboardingCompleted: Bool? {
           get {
-            return snapshot["onboardingCompleted"]! as! Bool
+            return snapshot["onboardingCompleted"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "onboardingCompleted")
           }
         }
 
-        public var hasConnectedAccounts: Bool {
+        public var hasConnectedAccounts: Bool? {
           get {
-            return snapshot["hasConnectedAccounts"]! as! Bool
+            return snapshot["hasConnectedAccounts"] as? Bool
           }
           set {
             snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -57172,18 +57261,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
           }
         }
 
-        public var createdAt: String {
+        public var createdAt: String? {
           get {
-            return snapshot["createdAt"]! as! String
+            return snapshot["createdAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "createdAt")
           }
         }
 
-        public var updatedAt: String {
+        public var updatedAt: String? {
           get {
-            return snapshot["updatedAt"]! as! String
+            return snapshot["updatedAt"] as? String
           }
           set {
             snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -57424,15 +57513,15 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -57441,7 +57530,7 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -57454,18 +57543,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -57490,18 +57579,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -57517,18 +57606,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -57725,15 +57814,15 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -57742,7 +57831,7 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -57755,18 +57844,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -57791,18 +57880,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -57818,18 +57907,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")
@@ -58026,15 +58115,15 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
 
               public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-                GraphQLField("firebaseUID", type: .nonNull(.scalar(String.self))),
+                GraphQLField("id", type: .scalar(GraphQLID.self)),
+                GraphQLField("firebaseUID", type: .scalar(String.self)),
                 GraphQLField("email", type: .scalar(String.self)),
                 GraphQLField("displayName", type: .scalar(String.self)),
-                GraphQLField("onboardingCompleted", type: .nonNull(.scalar(Bool.self))),
-                GraphQLField("hasConnectedAccounts", type: .nonNull(.scalar(Bool.self))),
+                GraphQLField("onboardingCompleted", type: .scalar(Bool.self)),
+                GraphQLField("hasConnectedAccounts", type: .scalar(Bool.self)),
                 GraphQLField("preferredCurrency", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-                GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
+                GraphQLField("createdAt", type: .scalar(String.self)),
+                GraphQLField("updatedAt", type: .scalar(String.self)),
               ]
 
               public var snapshot: Snapshot
@@ -58043,7 +58132,7 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 self.snapshot = snapshot
               }
 
-              public init(id: GraphQLID, firebaseUid: String, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool, hasConnectedAccounts: Bool, preferredCurrency: String? = nil, createdAt: String, updatedAt: String) {
+              public init(id: GraphQLID? = nil, firebaseUid: String? = nil, email: String? = nil, displayName: String? = nil, onboardingCompleted: Bool? = nil, hasConnectedAccounts: Bool? = nil, preferredCurrency: String? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
                 self.init(snapshot: ["__typename": "UserProfile", "id": id, "firebaseUID": firebaseUid, "email": email, "displayName": displayName, "onboardingCompleted": onboardingCompleted, "hasConnectedAccounts": hasConnectedAccounts, "preferredCurrency": preferredCurrency, "createdAt": createdAt, "updatedAt": updatedAt])
               }
 
@@ -58056,18 +58145,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var id: GraphQLID {
+              public var id: GraphQLID? {
                 get {
-                  return snapshot["id"]! as! GraphQLID
+                  return snapshot["id"] as? GraphQLID
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "id")
                 }
               }
 
-              public var firebaseUid: String {
+              public var firebaseUid: String? {
                 get {
-                  return snapshot["firebaseUID"]! as! String
+                  return snapshot["firebaseUID"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "firebaseUID")
@@ -58092,18 +58181,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var onboardingCompleted: Bool {
+              public var onboardingCompleted: Bool? {
                 get {
-                  return snapshot["onboardingCompleted"]! as! Bool
+                  return snapshot["onboardingCompleted"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "onboardingCompleted")
                 }
               }
 
-              public var hasConnectedAccounts: Bool {
+              public var hasConnectedAccounts: Bool? {
                 get {
-                  return snapshot["hasConnectedAccounts"]! as! Bool
+                  return snapshot["hasConnectedAccounts"] as? Bool
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "hasConnectedAccounts")
@@ -58119,18 +58208,18 @@ public final class OnDeleteFinancialSummarySubscription: GraphQLSubscription {
                 }
               }
 
-              public var createdAt: String {
+              public var createdAt: String? {
                 get {
-                  return snapshot["createdAt"]! as! String
+                  return snapshot["createdAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "createdAt")
                 }
               }
 
-              public var updatedAt: String {
+              public var updatedAt: String? {
                 get {
-                  return snapshot["updatedAt"]! as! String
+                  return snapshot["updatedAt"] as? String
                 }
                 set {
                   snapshot.updateValue(newValue, forKey: "updatedAt")

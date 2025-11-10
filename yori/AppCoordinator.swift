@@ -99,7 +99,7 @@ struct AppCoordinator: View {
                 // Update local state to match backend state
                 await MainActor.run {
                     // If backend says onboarding is completed, update local state
-                    if userProfile.onboardingCompleted {
+                    if let onboardingComplete = userProfile.onboardingCompleted, onboardingComplete {
                         UserDefaults.standard.set(true, forKey: "onboarding_completed")
                         isOnboardingCompleted = true
                     } else {
